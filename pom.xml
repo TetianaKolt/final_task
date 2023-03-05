@@ -21,7 +21,7 @@
     <browser>CHROME</browser>
     <browserHeight>1440</browserHeight>
     <browserWidth>900</browserWidth>
-    <threadCountQuantity>4</threadCountQuantity>
+    <threadCountQuantity>2</threadCountQuantity>
 
   </properties>
 
@@ -38,7 +38,6 @@
 
     <!--    TestNG    -->
 
-    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
     <dependency>
       <artifactId>testng</artifactId>
       <groupId>org.testng</groupId>
@@ -47,7 +46,6 @@
 
     <!--    WebDriver Bonigarcia    -->
 
-    <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
     <dependency>
       <groupId>io.github.bonigarcia</groupId>
       <artifactId>webdrivermanager</artifactId>
@@ -56,7 +54,6 @@
 
     <!--    AssertJ    -->
 
-    <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
     <dependency>
       <groupId>org.assertj</groupId>
       <artifactId>assertj-core</artifactId>
@@ -65,7 +62,6 @@
 
     <!--    Lombok    -->
 
-    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -93,7 +89,6 @@
 
     <!--    Allure    -->
 
-    <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
     <dependency>
       <groupId>io.qameta.allure</groupId>
       <artifactId>allure-testng</artifactId>
@@ -102,7 +97,6 @@
 
     <!--    Faker    -->
 
-    <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
     <dependency>
       <groupId>com.github.javafaker</groupId>
       <artifactId>javafaker</artifactId>
@@ -113,6 +107,8 @@
 
   <build>
     <plugins>
+
+      <!-- Maven SUREFIRE Plugin  -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -127,8 +123,8 @@
 
           <!--Browser, browser Width, browser Height  -->
           <systemPropertyVariables>
-            <browser.width>${browserWidth}</browser.width>
             <browser.height>${browserHeight}</browser.height>
+            <browser.width>${browserWidth}</browser.width>
             <browser.type>${browser}</browser.type>
           </systemPropertyVariables>
 
