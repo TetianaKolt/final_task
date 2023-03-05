@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>finalTask</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+
+    <allure.integration.version>2.12.0</allure.integration.version>
+    <aspectj.version>1.9.19</aspectj.version>
+    <log4j.version>2.17.2</log4j.version>
+
+    <!--    default values  -->
+    <suite>runAllTests.xml</suite>
+    <browser>CHROME</browser>
+    <browserHeight>1440</browserHeight>
+    <browserWidth>900</browserWidth>
+    <threadCountQuantity>4</threadCountQuantity>
+
+  </properties>
+
+  <dependencies>
+
+    <!--    Selenium    -->
+
+    <dependency>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>3.141.59</version>
+    </dependency>
+
+
+    <!--    TestNG    -->
+
+    <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+    <dependency>
+      <artifactId>testng</artifactId>
+      <groupId>org.testng</groupId>
+      <version>6.14.3</version>
+    </dependency>
+
+    <!--    WebDriver Bonigarcia    -->
+
+    <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+    <dependency>
+      <groupId>io.github.bonigarcia</groupId>
+      <artifactId>webdrivermanager</artifactId>
+      <version>5.3.2</version>
+    </dependency>
+
+    <!--    AssertJ    -->
+
+    <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.18.1</version>
+    </dependency>
+
+    <!--    Lombok    -->
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+      <version>1.18.24</version>
+    </dependency>
+
+    <!--    Log4j    -->
+
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+
+    <!--    Allure    -->
+
+    <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-maven -->
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-testng</artifactId>
+      <version>${allure.integration.version}</version>
+    </dependency>
+
+    <!--    Faker    -->
+
+    <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M7</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>${suite}</suiteXmlFile>
+          </suiteXmlFiles>
+          <argLine>
+            -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+          </argLine>
+
+          <!--Browser, browser Width, browser Height  -->
+          <systemPropertyVariables>
+            <browser.width>${browserWidth}</browser.width>
+            <browser.height>${browserHeight}</browser.height>
+            <browser.type>${browser}</browser.type>
+          </systemPropertyVariables>
+
+          <!-- Parallelization -->
+          <parallel>tests</parallel>
+          <threadCount>${threadCountQuantity}</threadCount>
+          <perCoreThreadCount>false</perCoreThreadCount>
+        </configuration>
+
+        <!-- AssertJ IN PLUGIN -->
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <!-- Allure PLUGIN -->
+      <plugin>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-maven</artifactId>
+        <version>2.12.0</version>
+        <configuration>
+          <reportDirectory>target/allure-report</reportDirectory>
+          <reportingOutputDirectory>target/allure-maven-plugin</reportingOutputDirectory>
+          <reportVersion>${allure.integration.version}</reportVersion>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+
+</project>
