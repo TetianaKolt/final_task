@@ -17,7 +17,7 @@
     <log4j.version>2.17.2</log4j.version>
 
     <!--    default values  -->
-    <suite>runAllTests.xml</suite>
+    <suite>allTests.xml</suite>
     <browser>CHROME</browser>
     <browserHeight>1440</browserHeight>
     <browserWidth>900</browserWidth>

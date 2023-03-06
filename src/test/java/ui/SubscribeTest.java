@@ -1,19 +1,21 @@
 package ui;
 
 import framework.pages.MainPage;
+import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
+
 public class SubscribeTest extends BaseTest {
 
-  MainPage mainPage = new MainPage();
+ private final MainPage mainPage = new MainPage();
 
 
   @Test
-  public void subscribeWithInvalidEmail() {
+  public void subscribeAreaTest() {
     //    On the bottom of the page check the text near the email field
     String actualTextNearEmailFieldInTheBottom = mainPage.goToTheBottom()
-        .getTextNearEmail(mainPage.getTextNearEmail());
+        .getTextNearEmail();
     String expectedTextNearEmailFieldInTheBottom = "Get our latest news and special sales";
 
     SoftAssertions softAssertions = new SoftAssertions();
@@ -23,7 +25,7 @@ public class SubscribeTest extends BaseTest {
 
     //On the bottom of the page check that text under the email field
     String actualTextUnderEmailFieldInTheBottom = mainPage.goToTheBottom()
-        .getTextNearEmail(mainPage.getTextUnderEmail());
+        .getTextUnderEmail();
     String expectedTextUnderEmailInTheBottom = "You may unsubscribe at any moment. "
         + "For that purpose, please find my contact info in the legal notice.";
 
@@ -36,9 +38,6 @@ public class SubscribeTest extends BaseTest {
     softAssertions.assertThat(actualSubscribeTest)
         .as("Text is not in uppercase " +  actualSubscribeTest)
         .isEqualTo(true);
-
-
-
 
     softAssertions.assertAll();
   }
