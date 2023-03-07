@@ -76,8 +76,6 @@ public class BasePage {
     WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), 7000);
     wait.until(ExpectedConditions.invisibilityOfAllElements(find(By.id("loadingMessage"))));
     getDriver().switchTo().frame("framelive");
-
-
   }
 
 

@@ -4,7 +4,6 @@ import static framework.helpers.Helpers.scrollToElement;
 
 import framework.components.HeaderComponents;
 import io.qameta.allure.Step;
-import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +20,7 @@ public class MainPage extends BasePage {
   private final By textUnderEmail = By.xpath("//div[@class='col-xs-12']/p");
   private final By subscribeButton = By.xpath("//input[@value='Subscribe']");
   private final By headerContainer = By.id("header");
+  private final HeaderComponents headerComponents = new HeaderComponents(find(headerContainer));
 
 
   public MainPage goToTheBottom() {
@@ -43,20 +43,21 @@ public class MainPage extends BasePage {
   }
 
   public List<WebElement> getLanguageList() {
-    HeaderComponents headerComponents = new HeaderComponents(find(headerContainer));
     headerComponents.getLanguageButton().click();
     Select select = new Select(find(By.xpath("//select[@class='link hidden-md-up']")));
     return select.getOptions();
   }
 
   public boolean checkIfLanguageExistsInList(String languageISOCode) {
-    for (WebElement lan:getLanguageList()) {
-      if(lan.getAttribute("data-iso-code").equals(languageISOCode)){
+    for (WebElement lan : getLanguageList()) {
+      if (lan.getAttribute("data-iso-code").equals(languageISOCode)) {
         return true;
       }
-
     }
     return false;
   }
 
+  public void clickOnSignInButton() {
+    headerComponents.getSignInButton().click();
+  }
 }
