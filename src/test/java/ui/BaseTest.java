@@ -26,7 +26,7 @@ public class BaseTest {
 
     driver.get("https://demo.prestashop.com/");
 
-//    driver.manage().window().setSize(new Dimension(height, width));
+    driver.manage().window().setSize(new Dimension(height, width));
     driver.manage().window().maximize();
     BasePage.setDriverThreadLocal(driver);
 

@@ -20,8 +20,11 @@ public class MainPage extends BasePage {
   private final By textUnderEmail = By.xpath("//div[@class='col-xs-12']/p");
   private final By subscribeButton = By.xpath("//input[@value='Subscribe']");
   private final By headerContainer = By.id("header");
-  private final HeaderComponents headerComponents = new HeaderComponents(find(headerContainer));
+  private HeaderComponents headerComponents;
 
+  public HeaderComponents getHeaderComponents() {
+    return new HeaderComponents(find(headerContainer));
+  }
 
   public MainPage goToTheBottom() {
     scrollToElement(find(footerLocator));
@@ -42,12 +45,14 @@ public class MainPage extends BasePage {
     return find(subscribeButton).getCssValue("text-transform").equals("uppercase");
   }
 
+  @Step
   public List<WebElement> getLanguageList() {
-    headerComponents.getLanguageButton().click();
+    getHeaderComponents().getLanguageButton().click();
     Select select = new Select(find(By.xpath("//select[@class='link hidden-md-up']")));
     return select.getOptions();
   }
 
+  @Step
   public boolean checkIfLanguageExistsInList(String languageISOCode) {
     for (WebElement lan : getLanguageList()) {
       if (lan.getAttribute("data-iso-code").equals(languageISOCode)) {
@@ -58,6 +63,6 @@ public class MainPage extends BasePage {
   }
 
   public void clickOnSignInButton() {
-    headerComponents.getSignInButton().click();
+    getHeaderComponents().getSignInButton().click();
   }
 }
