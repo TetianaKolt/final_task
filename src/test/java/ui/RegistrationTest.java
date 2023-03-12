@@ -15,7 +15,7 @@ public class RegistrationTest extends BaseTest {
   private final MainPage mainPage = new MainPage();
 
   @Test
-  public void registrationWithValidDataTest() {
+  public void registrationWithInvalidDataTest() {
     String firstName = "James8";
 
     CreateAnAccountPage accountPage = mainPage.clickOnSignInButton()
