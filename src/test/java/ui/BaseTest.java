@@ -1,10 +1,10 @@
 package ui;
 
-import static framework.pages.BasePage.waitUntilLoadingMessageDisappears;
+import static framework.components.pages.BasePage.waitUntilLoadingMessageDisappears;
 
 import framework.browserFactory.BrowserFactory;
 import framework.browserFactory.BrowserFactory.Browsers;
-import framework.pages.BasePage;
+import framework.components.pages.BasePage;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;

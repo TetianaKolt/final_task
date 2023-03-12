@@ -1,7 +1,6 @@
 package ui;
 
-import framework.pages.MainPage;
-import lombok.extern.log4j.Log4j2;
+import framework.components.pages.MainPage;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 

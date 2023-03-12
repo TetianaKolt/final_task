@@ -1,6 +1,6 @@
 package ui;
 
-import framework.pages.MainPage;
+import framework.components.pages.MainPage;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.openqa.selenium.WebElement;

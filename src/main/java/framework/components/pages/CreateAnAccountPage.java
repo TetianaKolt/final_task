@@ -1,8 +1,9 @@
-package framework.pages;
+package framework.components.pages;
 
 import static framework.helpers.Helpers.isHighlightedInRed;
 
 import org.openqa.selenium.By;
+
 
 public class CreateAnAccountPage extends BasePage {
 
@@ -20,6 +21,8 @@ public class CreateAnAccountPage extends BasePage {
   private final By saveButtonLocator = By.xpath(
       "//button[@class='btn btn-primary form-control-submit float-xs-right']");
   private final By errorMessageLocator = By.xpath("//li[@class='alert alert-danger']");
+
+
 
   public CreateAnAccountPage fillFirstName(String firstName) {
     find(firstNameInputLocator).sendKeys(firstName);
@@ -61,15 +64,22 @@ public class CreateAnAccountPage extends BasePage {
     return this;
   }
 
+  public CreateAnAccountPage clickSaveButtonPass() {
+    find(saveButtonLocator).click();
+    return this;
+  }
+
+
   public boolean firstNameIsHighlighted() {
     return isHighlightedInRed(firstNameInputLocator, "outline-color");
   }
 
-  public boolean checkIfErrorPopsUp(){
+  public boolean checkIfErrorPopsUp() {
     return find(errorMessageLocator).isDisplayed();
   }
-  public String errorMessageGetText(){
-   return find(errorMessageLocator).getText();
+
+  public String errorMessageGetText() {
+    return find(errorMessageLocator).getText();
   }
 
 }

@@ -1,8 +1,8 @@
-package framework.pages;
+package framework.components.pages;
 
+import static framework.components.HeaderComponents.getHeaderComponents;
 import static framework.helpers.Helpers.scrollToElement;
 
-import framework.components.HeaderComponents;
 import io.qameta.allure.Step;
 import java.util.List;
 import lombok.Getter;
@@ -19,12 +19,9 @@ public class MainPage extends BasePage {
   private final By textNearEmail = By.id("block-newsletter-label");
   private final By textUnderEmail = By.xpath("//div[@class='col-xs-12']/p");
   private final By subscribeButton = By.xpath("//input[@value='Subscribe']");
-  private final By headerContainer = By.id("header");
-  private HeaderComponents headerComponents;
+  private final By nameNextToCartLocator = By.xpath(
+      "//a[@class='account']//*[@class='hidden-sm-down']");
 
-  public HeaderComponents getHeaderComponents() {
-    return new HeaderComponents(find(headerContainer));
-  }
 
   public MainPage goToTheBottom() {
     scrollToElement(find(footerLocator));
@@ -63,7 +60,13 @@ public class MainPage extends BasePage {
   }
 
   public LogInPage clickOnSignInButton() {
-    getHeaderComponents().getSignInButton().click();
+    getHeaderComponents().getSignInOutUserInfo().click();
     return new LogInPage();
+  }
+
+  public WebElement checkNameNearCart() {
+    return getHeaderComponents()
+        .getSignInOutUserInfo()
+        .findElement(nameNextToCartLocator);
   }
 }

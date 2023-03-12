@@ -1,9 +1,9 @@
 package framework.helpers;
 
-import static framework.pages.BasePage.find;
+import static framework.components.pages.BasePage.find;
 
 import com.github.javafaker.Faker;
-import framework.pages.BasePage;
+import framework.components.pages.BasePage;
 import io.qameta.allure.Attachment;
 import java.io.File;
 import lombok.SneakyThrows;
@@ -16,6 +16,12 @@ import org.openqa.selenium.WebElement;
 
 
 public class Helpers {
+
+//  private static final By headerContainer = By.id("header");
+//
+//  public static HeaderComponents getHeaderComponents() {
+//    return new HeaderComponents(find(headerContainer));
+//  }
 
 
   // scroll to element
