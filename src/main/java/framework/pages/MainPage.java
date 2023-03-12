@@ -62,7 +62,8 @@ public class MainPage extends BasePage {
     return false;
   }
 
-  public void clickOnSignInButton() {
+  public LogInPage clickOnSignInButton() {
     getHeaderComponents().getSignInButton().click();
+    return new LogInPage();
   }
 }

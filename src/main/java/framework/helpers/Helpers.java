@@ -1,11 +1,14 @@
 package framework.helpers;
 
+import static framework.pages.BasePage.find;
+
 import com.github.javafaker.Faker;
 import framework.pages.BasePage;
 import io.qameta.allure.Attachment;
 import java.io.File;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -21,8 +24,12 @@ public class Helpers {
     jse.executeScript("arguments[0].scrollIntoView(true);", element);
   }
 
+  // check if highlighted in red
+  public static boolean isHighlightedInRed(By locator, String cssValue){
+    return find(locator).getCssValue(cssValue).equals("rgba(255, 76, 76, 1)");
+  }
 
-  // Make a screenshot
+  // Take a screenshot
   @SneakyThrows
   public static void makeScreenShot() {
     File scrFile = ((TakesScreenshot) BasePage.getDriver()).getScreenshotAs(OutputType.FILE);
@@ -35,5 +42,7 @@ public class Helpers {
   public static byte[] takeScreenShot(String fileName) {
     return ((TakesScreenshot) BasePage.getDriver()).getScreenshotAs(OutputType.BYTES);
   }
+
+
 
 }
