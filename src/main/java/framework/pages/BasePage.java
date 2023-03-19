@@ -1,4 +1,4 @@
-package framework.components.pages;
+package framework.pages;
 
 import java.util.List;
 import org.openqa.selenium.By;
@@ -42,7 +42,7 @@ public class BasePage {
   public void hoverOverElement(By locator) {
     WebElement element = find(locator);
     Actions action = new Actions(getDriver());
-    action.moveToElement(element).perform();
+    action.moveToElement(element).build().perform();
   }
 
   protected WebElement waitUntilClickable(By locator, int seconds) {
@@ -74,7 +74,10 @@ public class BasePage {
   // wait until loading message disappears and switch to iFrame of body
   public static void waitUntilLoadingMessageDisappears() {
     WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), 7000);
-    wait.until(ExpectedConditions.invisibilityOfAllElements(find(By.id("loadingMessage"))));
+    WebElement loadingMessage = find(By.id("loadingMessage"));
+
+    wait.until(ExpectedConditions.visibilityOfAllElements(loadingMessage));
+    wait.until(ExpectedConditions.invisibilityOfAllElements(loadingMessage));
     getDriver().switchTo().frame("framelive");
   }
 

@@ -1,11 +1,16 @@
 package framework.helpers;
 
-import static framework.components.pages.BasePage.find;
+import static framework.pages.BasePage.find;
 
 import com.github.javafaker.Faker;
-import framework.components.pages.BasePage;
+import framework.components.ProductComponents;
+import framework.pages.BasePage;
 import io.qameta.allure.Attachment;
 import java.io.File;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -13,15 +18,15 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 
 public class Helpers {
-
-//  private static final By headerContainer = By.id("header");
-//
-//  public static HeaderComponents getHeaderComponents() {
-//    return new HeaderComponents(find(headerContainer));
-//  }
+ // hover over element
+ public static void hoverOverElement(WebElement element) {
+   Actions actions = new Actions(BasePage.getDriver());
+   actions.moveToElement(element).build().perform();
+ }
 
 
   // scroll to element
@@ -49,6 +54,32 @@ public class Helpers {
     return ((TakesScreenshot) BasePage.getDriver()).getScreenshotAs(OutputType.BYTES);
   }
 
+  //Get digits from WebElement
+  public static BigDecimal getDigits(WebElement el) {
+    String text = el.getText();
+    String price = text.replaceAll("[^\\d.]", "");
+    return new BigDecimal(price);
+  }
+
+
+
+  //// Get all products
+  public static List<ProductComponents> getAllProducts(By containerLocator) {
+    return BasePage.findAll(containerLocator).stream()
+        .map(ProductComponents::new)
+        .collect(Collectors.toList());
+  }
+
+  public static List<BigDecimal> checkCalculationOfDiscountedPrice(List<ProductComponents> products) {
+    return products.stream()
+        .map(product -> {
+          BigDecimal productDiscount = product.getProductDiscountTagText();
+          BigDecimal regularPrice = product.getProductRegularPriceText();
+          return regularPrice.subtract(regularPrice.multiply(productDiscount)
+              .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN));
+        })
+        .collect(Collectors.toList());
+  }
 
 
 }

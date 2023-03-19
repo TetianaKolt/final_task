@@ -31,7 +31,7 @@ public class FakeStringsHelper {
 
   public static String generateFakeDate() {
     Date fakeBirthdate = faker.date().birthday();
-    SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat DateFor = new SimpleDateFormat("MM/dd/yyyy");
     return DateFor.format(fakeBirthdate);
   }
 

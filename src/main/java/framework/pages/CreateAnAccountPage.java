@@ -1,4 +1,4 @@
-package framework.components.pages;
+package framework.pages;
 
 import static framework.helpers.Helpers.isHighlightedInRed;
 

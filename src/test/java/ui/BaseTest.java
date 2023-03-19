@@ -1,10 +1,10 @@
 package ui;
 
-import static framework.components.pages.BasePage.waitUntilLoadingMessageDisappears;
+import static framework.pages.BasePage.waitUntilLoadingMessageDisappears;
 
 import framework.browserFactory.BrowserFactory;
 import framework.browserFactory.BrowserFactory.Browsers;
-import framework.components.pages.BasePage;
+import framework.pages.BasePage;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +26,7 @@ public class BaseTest {
 
     driver.get("https://demo.prestashop.com/");
 
-    driver.manage().window().setSize(new Dimension(height, width));
+    driver.manage().window().setSize(new Dimension(width, height));
     driver.manage().window().maximize();
     BasePage.setDriverThreadLocal(driver);
 

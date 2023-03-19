@@ -1,9 +1,8 @@
 package ui;
 
-import framework.components.pages.MainPage;
+import framework.pages.MainPage;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class LanguageTest extends BaseTest {
@@ -13,7 +12,7 @@ public class LanguageTest extends BaseTest {
   @Test
   public void checkLanguages() {
 
-    List<WebElement> languages = mainPage.getLanguageList();
+    List<String> languages = mainPage.getLanguageList();
     int actualQuantityOfLanguages = languages.size();
     int expectedQuantityOfLanguages = 44;
 
@@ -24,7 +23,7 @@ public class LanguageTest extends BaseTest {
         .isEqualTo(expectedQuantityOfLanguages);
 
     //Check that 'Українська' language exist in dropdown
-    boolean exists = mainPage.checkIfLanguageExistsInList("uk");
+    boolean exists = mainPage.checkIfLanguageExistsInList("Укіраїнська");
     softAssertions.assertThat(exists)
         .as("The language is not in the list")
         .isTrue();

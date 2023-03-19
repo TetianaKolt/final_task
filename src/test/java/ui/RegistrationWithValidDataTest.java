@@ -1,14 +1,14 @@
 package ui;
 
-import static framework.DataForTests.DataForTests.userBirthDate;
-import static framework.DataForTests.DataForTests.userEmail;
-import static framework.DataForTests.DataForTests.userFirstName;
-import static framework.DataForTests.DataForTests.userLastName;
-import static framework.DataForTests.DataForTests.userPassword;
+import static framework.helpers.FakeStringsHelper.generateFakeDate;
+import static framework.helpers.FakeStringsHelper.generateFakeEmail;
+import static framework.helpers.FakeStringsHelper.generateFakeFirstName;
+import static framework.helpers.FakeStringsHelper.generateFakeLastName;
+import static framework.helpers.FakeStringsHelper.generateFakePassword;
 
-import framework.components.pages.MainPage;
+import framework.pages.MainPage;
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
-import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 public class RegistrationWithValidDataTest extends BaseTest {
@@ -17,6 +17,12 @@ public class RegistrationWithValidDataTest extends BaseTest {
 
   @Test
   public void registrationWithValidDataTest() {
+
+    String userFirstName = generateFakeFirstName();
+    String userLastName = generateFakeLastName();
+    String userEmail = generateFakeEmail();
+    String userPassword = generateFakePassword();
+    String userBirthDate = generateFakeDate();
 
     mainPage.clickOnSignInButton()
         .clickOnNoAccountLink()
@@ -29,18 +35,12 @@ public class RegistrationWithValidDataTest extends BaseTest {
         .tickIAgreeCheckbox()
         .clickSaveButtonPass();
 
-    WebElement nameNearTheCart = mainPage.checkNameNearCart();
+    String nameNearTheCart = mainPage.checkNameNearCart();
 
 //    Check your name appear near cart button
-    SoftAssertions softAssertions = new SoftAssertions();
-    softAssertions.assertThat(nameNearTheCart.isDisplayed())
-        .as("Registered user name is not displayed near the cart after registration")
-        .isTrue();
-    softAssertions.assertThat(nameNearTheCart.getText())
-        .as("Name is not the same as registered: " + "[" + userFirstName + "] "
-            + "[" + userLastName + "]")
-        .isEqualTo(userFirstName + " " + userLastName);
-    softAssertions.assertAll();
 
+    Assertions.assertThat(nameNearTheCart)
+        .as("Registered user name is not displayed near the cart after registration")
+        .isEqualTo(userFirstName + " " + userLastName);
   }
 }

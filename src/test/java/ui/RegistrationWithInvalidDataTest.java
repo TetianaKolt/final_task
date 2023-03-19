@@ -5,8 +5,8 @@ import static framework.helpers.FakeStringsHelper.generateFakeEmail;
 import static framework.helpers.FakeStringsHelper.generateFakeLastName;
 import static framework.helpers.FakeStringsHelper.generateFakePassword;
 
-import framework.components.pages.CreateAnAccountPage;
-import framework.components.pages.MainPage;
+import framework.pages.CreateAnAccountPage;
+import framework.pages.MainPage;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 

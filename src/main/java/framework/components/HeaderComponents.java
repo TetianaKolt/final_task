@@ -1,6 +1,8 @@
 package framework.components;
 
-import static framework.components.pages.BasePage.find;
+import static framework.enums.Categories.ACCESSORIES;
+import static framework.enums.Categories.ART;
+import static framework.enums.Categories.CLOTHES;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -8,15 +10,15 @@ import org.openqa.selenium.WebElement;
 
 @Getter
 public class HeaderComponents {
-  private static final By headerContainer = By.id("header");
+
   private final WebElement contactUsButton;
   private final WebElement languageButton;
   private final WebElement signInOutUserInfo;
   private final WebElement cartButton;
   private final WebElement logoMenuOption;
-  private final WebElement clothesMenuOption;
-  private final WebElement accessoriesMenuOption;
-  private final WebElement artMenuOption;
+//  private final WebElement clothesMenuOption;
+//  private final WebElement accessoriesMenuOption;
+//  private final WebElement artMenuOption;
   private final WebElement searchField;
 
 
@@ -26,15 +28,10 @@ public class HeaderComponents {
     this.signInOutUserInfo = container.findElement(By.xpath(".//*[@id='_desktop_user_info']"));
     this.cartButton = container.findElement(By.xpath(".//*[@id='_desktop_cart']"));
     this.logoMenuOption = container.findElement(By.xpath(".//*[@id='_desktop_logo']"));
-    this.clothesMenuOption = container.findElement(By.xpath(".//*[@id='category-3']"));
-    this.accessoriesMenuOption = container.findElement(By.xpath(".//*[@id='category-6']"));
-    this.artMenuOption = container.findElement(By.xpath(".//*[@id='category-9']"));
+//    this.clothesMenuOption = container.findElement(By.xpath("."+CLOTHES.getLocator()));
+//    this.accessoriesMenuOption = container.findElement(By.xpath("."+ACCESSORIES.getLocator()));
+//    this.artMenuOption = container.findElement(By.xpath("."+ART.getLocator()));
     this.searchField = container.findElement(By.xpath(".//div[@id='search_widget']"));
-  }
-
-
-  public static HeaderComponents getHeaderComponents() {
-    return new HeaderComponents(find(headerContainer));
   }
 
 }

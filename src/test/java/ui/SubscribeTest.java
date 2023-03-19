@@ -1,6 +1,6 @@
 package ui;
 
-import framework.components.pages.MainPage;
+import framework.pages.MainPage;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
