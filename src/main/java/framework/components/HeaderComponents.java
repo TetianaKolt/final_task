@@ -1,8 +1,5 @@
 package framework.components;
 
-import static framework.enums.Categories.ACCESSORIES;
-import static framework.enums.Categories.ART;
-import static framework.enums.Categories.CLOTHES;
 
 import lombok.Getter;
 import org.openqa.selenium.By;

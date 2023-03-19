@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 @Getter
 @Log4j2
@@ -32,6 +34,7 @@ public class MainPage extends BasePage {
 
   private final By productComponentsLocator = By.xpath("//div[@class='product-description']");
   private final By priceDropButtonLocator = By.id("link-product-page-prices-drop-1");
+  private final By allProductsButtonLocator = By.xpath("//a[contains(text(),'All products')]");
 
 
   public MainPage goToTheBottom() {
@@ -144,4 +147,23 @@ public class MainPage extends BasePage {
     find(priceDropButtonLocator).click();
     return new PricesDropPage();
   }
+
+  public HomePage clickAllProducts() {
+    WebElement allProductsButton = find(allProductsButtonLocator);
+    scrollToElement(allProductsButton);
+    allProductsButton.click();
+    return new HomePage();
+  }
+
+  public SearchResultsPage searchProductByText(String wordToSearch) {
+    WebElement searchField  = getHeaderComponents().getSearchField();
+    Actions actions = new Actions(getDriver());
+    actions.moveToElement(searchField)
+        .click().sendKeys(wordToSearch)
+        .sendKeys(Keys.ENTER)
+        .build()
+        .perform();
+    return new SearchResultsPage();
+  }
+
 }

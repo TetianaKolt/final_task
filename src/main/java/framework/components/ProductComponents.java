@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 @Getter
@@ -51,14 +52,15 @@ public class ProductComponents {
     try {
       this.productRegularPrice = container.findElement
           (By.xpath(".//span[@class='regular-price']"));
-    } catch (NoSuchElementException e) {
+    } catch (Exception e) {
       productRegularPrice = null;
     }
     try {
       this.productRegularPriceText = getDigits(productRegularPrice);
-    } catch (NullPointerException e) {
+    } catch (Exception e) {
       productRegularPriceText = null;
     }
+
     this.productPrice = container.findElement(By.xpath(".//span[@class='price']"));
     this.productPriceText = getDigits(productPrice);
 //    this.addToWishListButton = container.findElement(

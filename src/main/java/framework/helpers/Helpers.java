@@ -9,6 +9,7 @@ import io.qameta.allure.Attachment;
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.SneakyThrows;
@@ -22,11 +23,12 @@ import org.openqa.selenium.interactions.Actions;
 
 
 public class Helpers {
- // hover over element
- public static void hoverOverElement(WebElement element) {
-   Actions actions = new Actions(BasePage.getDriver());
-   actions.moveToElement(element).build().perform();
- }
+
+  // hover over element
+  public static void hoverOverElement(WebElement element) {
+    Actions actions = new Actions(BasePage.getDriver());
+    actions.moveToElement(element).build().perform();
+  }
 
 
   // scroll to element
@@ -36,7 +38,7 @@ public class Helpers {
   }
 
   // check if highlighted in red
-  public static boolean isHighlightedInRed(By locator, String cssValue){
+  public static boolean isHighlightedInRed(By locator, String cssValue) {
     return find(locator).getCssValue(cssValue).equals("rgba(255, 76, 76, 1)");
   }
 
@@ -62,15 +64,26 @@ public class Helpers {
   }
 
 
-
   //// Get all products
   public static List<ProductComponents> getAllProducts(By containerLocator) {
-    return BasePage.findAll(containerLocator).stream()
-        .map(ProductComponents::new)
-        .collect(Collectors.toList());
+//    return BasePage.findAll(containerLocator).stream()
+//        .map(ProductComponents::new)
+//        .collect(Collectors.toList());
+
+
+    List<ProductComponents> products = new ArrayList<>();
+    List<WebElement> containers = BasePage.findAll(containerLocator);
+
+    for (WebElement container : containers) {
+      ProductComponents productComponents = new ProductComponents(container);
+      products.add(productComponents);
+    }
+    return products;
   }
 
-  public static List<BigDecimal> checkCalculationOfDiscountedPrice(List<ProductComponents> products) {
+
+  public static List<BigDecimal> checkCalculationOfDiscountedPrice(
+      List<ProductComponents> products) {
     return products.stream()
         .map(product -> {
           BigDecimal productDiscount = product.getProductDiscountTagText();
