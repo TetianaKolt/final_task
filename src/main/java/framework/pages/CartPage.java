@@ -9,6 +9,8 @@ public class CartPage extends BasePage {
       "//div[@id='blockcart-modal']//div[@class='modal-content']");
 
   public CartModalWindowComponent getCartModalWindowComponents() {
+    waitUntilPresent(cartModalWindowLocator,3);
+    getDriver().switchTo().activeElement();
     return new CartModalWindowComponent(find(cartModalWindowLocator));
   }
 

@@ -10,29 +10,29 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class CartModalWindowComponent {
 
-  private String modalTitle;
-  private WebElement productImage;
-  private WebElement productName;
-  private String productNameText;
-  private WebElement productPriceEl;
-  private BigDecimal productPrice;
+  private final String modalTitle;
+  private final WebElement productImage;
+  private final WebElement productName;
+  private final String productNameText;
+  private final WebElement productPriceEl;
+  private final BigDecimal productPrice;
 
-  private String selectedOptions;
-  private WebElement selectedQuantity;
-  private String selectedQuantityStr;
-  private String cartProductCountsText;
-  private WebElement subTotalPriceEl;
-  private BigDecimal subTotalPrice;
-  private WebElement shippingValueEl;
-  private String shippingValue;
-  private WebElement totalValueEl;
-  private BigDecimal totalValue;
-  private WebElement continueShoppingButton;
-  private WebElement proceedToCheckoutButton;
+  private final String selectedOptions;
+  private final WebElement selectedQuantity;
+  private final String selectedQuantityStr;
+  private final String cartProductCountsText;
+  private final WebElement subTotalPriceEl;
+  private final BigDecimal subTotalPrice;
+  private final WebElement shippingValueEl;
+  private final String shippingValue;
+  private final WebElement totalValueEl;
+  private final BigDecimal totalValue;
+  private final WebElement continueShoppingButton;
+  private final WebElement proceedToCheckoutButton;
 
   public CartModalWindowComponent(WebElement container) {
     this.modalTitle = container.findElement
-        (By.xpath(".//h4[@id='myModalLabel']/i")).getText();
+        (By.xpath(".//h4[@id='myModalLabel']")).getText().substring(1);
     this.productImage = container.findElement
         (By.xpath(".//div[@class='col-md-6']/img"));
     this.productName = container.findElement
@@ -42,9 +42,9 @@ public class CartModalWindowComponent {
         (By.xpath(".//div[@class='col-md-6']/p[@class='product-price']"));
     this.productPrice = getDigits(productPriceEl);
     this.selectedOptions = container.findElement
-        (By.xpath(".//div[@class='col-md-6']/span")).getText();
+        (By.xpath(".//div[@class='col-md-6']/span/strong")).getText();
     this.selectedQuantity = container.findElement
-        (By.xpath(".//div[@class='col-md-6']//span[@class='product-quantity']"));
+        (By.xpath(". //div[@class='col-md-6']//span[@class='product-quantity']/strong"));
     this.selectedQuantityStr = selectedQuantity.getText();
     this.cartProductCountsText = container.findElement(
         By.xpath(".//div[@class='cart-content']//p[@class='cart-products-count']"))
