@@ -8,6 +8,7 @@ import framework.pages.BasePage;
 import io.qameta.allure.Attachment;
 import java.io.File;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,9 +61,19 @@ public class Helpers {
   public static BigDecimal getDigits(WebElement el) {
     String text = el.getText();
     String price = text.replaceAll("[^\\d.]", "");
+    if(price.equals("")){
+      return BigDecimal.ZERO;
+    }
     return new BigDecimal(price);
   }
 
+  // Check TOTAL calculation
+
+  public static BigDecimal checkTotalCalculation(BigDecimal originalPrice, BigDecimal quantity, BigDecimal shippingFee){
+    return originalPrice
+        .multiply(quantity)
+        .subtract(shippingFee);
+  }
 
   //// Get all products
   public static List<ProductComponents> getAllProducts(By containerLocator) {

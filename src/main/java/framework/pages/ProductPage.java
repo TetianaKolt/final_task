@@ -1,9 +1,11 @@
 package framework.pages;
 
 import framework.components.ProductDetailsComponent;
+import lombok.SneakyThrows;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 public class ProductPage extends BasePage {
@@ -21,15 +23,23 @@ public class ProductPage extends BasePage {
     return this;
   }
 
+
   public ProductPage changeQuantityTo(int quantity) {
     WebElement quantityEl = getProductDetailsComponents().getProductQuantityWanted();
-    quantityEl.clear();
+///////// ????????????????????????????????????????
+//    quantityEl.clear();
+    JavascriptExecutor js = (JavascriptExecutor) getDriver();
+    js.executeScript("arguments[0].value = '';", quantityEl);
     quantityEl.sendKeys(String.valueOf(quantity));
     return this;
   }
 
   public CartPage clickAddToCart() {
-    getProductDetailsComponents().getAddToCartButton().click();
+    try {
+      getProductDetailsComponents().getAddToCartButton().click();
+    } catch (StaleElementReferenceException e) {
+      getProductDetailsComponents().getAddToCartButton().click();
+    }
     return new CartPage();
   }
 }

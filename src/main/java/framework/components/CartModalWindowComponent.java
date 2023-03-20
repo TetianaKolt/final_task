@@ -19,12 +19,12 @@ public class CartModalWindowComponent {
 
   private final String selectedOptions;
   private final WebElement selectedQuantity;
-  private final String selectedQuantityStr;
+  private BigDecimal selectedQuantityInt;
   private final String cartProductCountsText;
   private final WebElement subTotalPriceEl;
   private final BigDecimal subTotalPrice;
   private final WebElement shippingValueEl;
-  private final String shippingValue;
+  private final BigDecimal shippingValue;
   private final WebElement totalValueEl;
   private final BigDecimal totalValue;
   private final WebElement continueShoppingButton;
@@ -45,7 +45,7 @@ public class CartModalWindowComponent {
         (By.xpath(".//div[@class='col-md-6']/span/strong")).getText();
     this.selectedQuantity = container.findElement
         (By.xpath(". //div[@class='col-md-6']//span[@class='product-quantity']/strong"));
-    this.selectedQuantityStr = selectedQuantity.getText();
+    this.selectedQuantityInt = getDigits(selectedQuantity);
     this.cartProductCountsText = container.findElement(
         By.xpath(".//div[@class='cart-content']//p[@class='cart-products-count']"))
         .getText();
@@ -54,7 +54,7 @@ public class CartModalWindowComponent {
     this.subTotalPrice = getDigits(subTotalPriceEl);
     this.shippingValueEl = container.findElement
         (By.xpath(".//div[@class='cart-content']//span[@class='shipping value']"));
-    this.shippingValue = shippingValueEl.getText();
+    this.shippingValue = getDigits(shippingValueEl);
     this.totalValueEl = container.findElement
         (By.xpath(".//div[@class='cart-content']//span[@class='value']"));;
     this.totalValue = getDigits(totalValueEl);
