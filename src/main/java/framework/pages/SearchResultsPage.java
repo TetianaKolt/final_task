@@ -13,6 +13,7 @@ public class SearchResultsPage extends BasePage {
   private final By productsContainerLocator = By.xpath(
       "//div[@class='js-product product col-xs-12 col-sm-6 col-xl-3']");
 
+
   public List<ProductComponents> getProductComponents() {
     waitUntilPresent(productsContainerLocator, 5);
     return getAllProducts(productsContainerLocator);

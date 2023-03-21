@@ -25,8 +25,8 @@ public class CartModalWindowComponent {
   private final BigDecimal subTotalPrice;
   private final WebElement shippingValueEl;
   private final BigDecimal shippingValue;
-  private final WebElement totalValueEl;
-  private final BigDecimal totalValue;
+  private final WebElement totalSumEl;
+  private final BigDecimal totalSum;
   private final WebElement continueShoppingButton;
   private final WebElement proceedToCheckoutButton;
 
@@ -55,9 +55,9 @@ public class CartModalWindowComponent {
     this.shippingValueEl = container.findElement
         (By.xpath(".//div[@class='cart-content']//span[@class='shipping value']"));
     this.shippingValue = getDigits(shippingValueEl);
-    this.totalValueEl = container.findElement
+    this.totalSumEl = container.findElement
         (By.xpath(".//div[@class='cart-content']//span[@class='value']"));;
-    this.totalValue = getDigits(totalValueEl);
+    this.totalSum = getDigits(totalSumEl);
     this.continueShoppingButton = container.findElement
         (By.xpath(".//div[@class='cart-content-btn']"
             + "//button[@class='btn btn-secondary']"));

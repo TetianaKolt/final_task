@@ -1,7 +1,8 @@
 package framework.pages;
 
+import framework.components.HeaderComponents;
 import framework.components.ProductDetailsComponent;
-import lombok.SneakyThrows;
+import framework.enums.ColorOptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -11,6 +12,11 @@ import org.openqa.selenium.support.ui.Select;
 public class ProductPage extends BasePage {
 
   private final By containerLocator = By.id("wrapper");
+  private final By headerContainer = By.id("header");
+
+  public HeaderComponents getHeaderComponents() {
+    return new HeaderComponents(find(headerContainer));
+  }
 
   public ProductDetailsComponent getProductDetailsComponents() {
     return new ProductDetailsComponent(find(containerLocator));
@@ -42,4 +48,25 @@ public class ProductPage extends BasePage {
     }
     return new CartPage();
   }
+
+  public ProductPage customizeProduct(String phraseToCustomize) {
+    getProductDetailsComponents().getProductCustomizationInput()
+        .sendKeys(phraseToCustomize);
+    getProductDetailsComponents().getSaveCustomizationButton().click();
+    return this;
+  }
+
+  public SearchResultsPage findAnotherProductByText(String productToFind) {
+    MainPage mainPage = new MainPage();
+    mainPage.searchProductByText(productToFind);
+    return new SearchResultsPage();
+  }
+
+  public ProductPage selectColor(ColorOptions color) {
+    getProductDetailsComponents().getProductColorEl()
+        .findElement(By.xpath("//label[@aria-label='" + color.getColorName()
+            + "']/input")).click();
+    return this;
+  }
+
 }

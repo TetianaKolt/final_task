@@ -8,7 +8,6 @@ import framework.pages.BasePage;
 import io.qameta.allure.Attachment;
 import java.io.File;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,11 +67,13 @@ public class Helpers {
   }
 
   // Check TOTAL calculation
-
-  public static BigDecimal checkTotalCalculation(BigDecimal originalPrice, BigDecimal quantity, BigDecimal shippingFee){
+  public static BigDecimal checkTotalCalculationPriceQuantity(BigDecimal originalPrice, BigDecimal quantity, BigDecimal shippingFee){
     return originalPrice
         .multiply(quantity)
         .subtract(shippingFee);
+  }
+  public static BigDecimal checkTotalCalculationSubtotalShippingFee(BigDecimal subTotal, BigDecimal shippingFee){
+    return subTotal.subtract(shippingFee);
   }
 
   //// Get all products

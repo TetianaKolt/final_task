@@ -46,16 +46,6 @@ public class MainPage extends BasePage {
     return new HeaderComponents(find(headerContainer));
   }
 
-//  public List<ProductComponents> getProductComponents() {
-//    List<ProductComponents> productComponents = new ArrayList<>();
-//    List<WebElement> containers = findAll(productComponentsLocator);
-//    for (WebElement container : containers) {
-//      ProductComponents components = new ProductComponents(container);
-//      productComponents.add(components);
-//    }
-//    return productComponents;
-//  }
-
   public List<ProductComponents> getProductComponents() {
     scrollToElement(find(By.xpath("//section[@class='featured-products clearfix']")));
 /// ????????????????????????????

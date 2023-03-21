@@ -8,7 +8,6 @@ import static framework.helpers.FakeStringsHelper.generateFakePassword;
 
 import framework.pages.MainPage;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 public class RegistrationWithValidDataTest extends BaseTest {
