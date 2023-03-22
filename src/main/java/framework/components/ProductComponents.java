@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 
 @Getter
@@ -21,7 +20,7 @@ public class ProductComponents {
   private BigDecimal productRegularPriceText;
   private WebElement productPrice;
   private BigDecimal productPriceText;
-//  private final WebElement addToWishListButton;
+
 
   public ProductComponents(WebElement container) {
     this.productTitleElement = container.findElement
@@ -69,8 +68,6 @@ public class ProductComponents {
     }catch (NullPointerException e) {
       this.productPriceText = null;
     }
-//    this.addToWishListButton = container.findElement(
-//        By.xpath(".//button[@class='wishlist-button-add']"));
   }
 
 

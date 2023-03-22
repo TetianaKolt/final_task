@@ -14,7 +14,7 @@ public class SubscribeTest extends BaseTest {
   public void subscribeAreaTest() {
     //    On the bottom of the page check the text near the email field
     String actualTextNearEmailFieldInTheBottom = mainPage.goToTheBottom()
-        .getTextNearEmail();
+        .getTextNearEmailBlockNews();
     String expectedTextNearEmailFieldInTheBottom = "Get our latest news and special sales";
 
     SoftAssertions softAssertions = new SoftAssertions();
@@ -22,7 +22,8 @@ public class SubscribeTest extends BaseTest {
         .as("Actual text near the email field in the bottom differs from expected")
         .isEqualTo(expectedTextNearEmailFieldInTheBottom);
 
-    //On the bottom of the page check that text under the email field
+    //On the buttom of the page check that text under email field contains 'You may unsubscribe at any moment.
+    // For that purpose, please find my contact info in the legal notice.'
     String actualTextUnderEmailFieldInTheBottom = mainPage.goToTheBottom()
         .getTextUnderEmail();
     String expectedTextUnderEmailInTheBottom = "You may unsubscribe at any moment. "

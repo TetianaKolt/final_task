@@ -3,6 +3,7 @@ package framework.pages;
 import static framework.helpers.Helpers.getAllProducts;
 import static framework.helpers.Helpers.scrollToElement;
 
+import framework.components.FooterComponents;
 import framework.components.HeaderComponents;
 import framework.components.ProductComponents;
 import framework.enums.Categories;
@@ -22,8 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 public class MainPage extends BasePage {
 
   private final By footerLocator = By.xpath("//footer[@class='js-footer']");
-  private final By textNearEmail = By.id("block-newsletter-label");
-  private final By textUnderEmail = By.xpath("//div[@class='col-xs-12']/p");
+
   private final By subscribeButton = By.xpath("//input[@value='Subscribe']");
   private final By nameNextToCartLocator = By.xpath(
       "//a[@class='account']//*[@class='hidden-sm-down']");
@@ -43,29 +43,33 @@ public class MainPage extends BasePage {
     return this;
   }
 
+  public FooterComponents getFooterComponents() {
+    return new FooterComponents(find(footerLocator));
+  }
+
   public HeaderComponents getHeaderComponents() {
     return new HeaderComponents(find(headerContainer));
   }
 
   public List<ProductComponents> getProductComponents() {
     scrollToElement(find(By.xpath("//section[@class='featured-products clearfix']")));
-/// ????????????????????????????
     waitUntilVisible(By.xpath("//div[@class='thumbnail-top']"), 5);
     return getAllProducts(productComponentsLocator);
   }
 
   @Step
-  public String getTextNearEmail() {
-    return find(textNearEmail).getText();
+  public String getTextNearEmailBlockNews() {
+    return getFooterComponents().getTextNearEmailBlockNewsLetterText();
   }
 
   @Step
   public String getTextUnderEmail() {
-    return find(textUnderEmail).getText();
+    return getFooterComponents().getTextUnderEmailInputText();
   }
 
   public boolean checkTextInSubscribeButton() {
-    return find(subscribeButton).getCssValue("text-transform").equals("uppercase");
+    return getFooterComponents().getSubscribeButton().getCssValue("text-transform")
+        .equals("uppercase");
   }
 
   @Step
