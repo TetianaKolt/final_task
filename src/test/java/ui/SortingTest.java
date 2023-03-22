@@ -67,13 +67,13 @@ public class SortingTest extends BaseTest {
         .getProducts();
 
     List<BigDecimal> expectedPricesOrder = products.stream()
-        .map(ProductComponents::getProductPriceText)
+        .map(ProductComponents::getProductNewPriceText)
         .sorted()
         .collect(Collectors.toList());
 
     //Check that sorting is correct
     softAssertions.assertThat(products)
-        .map(ProductComponents::getProductPriceText)
+        .map(ProductComponents::getProductNewPriceText)
         .as("Products are not sorted correctly according to the option " + PRICE_LOW_TO_HIGH)
         .containsExactlyElementsOf(expectedPricesOrder);
 
@@ -83,13 +83,13 @@ public class SortingTest extends BaseTest {
         .getProducts();
 
    expectedPricesOrder = products.stream()
-        .map(ProductComponents::getProductPriceText)
+        .map(ProductComponents::getProductNewPriceText)
         .sorted(Comparator.reverseOrder())
         .collect(Collectors.toList());
 
     //Check that sorting is correct
     softAssertions.assertThat(products)
-        .map(ProductComponents::getProductPriceText)
+        .map(ProductComponents::getProductNewPriceText)
         .as("Products are not sorted correctly according to the option " + PRICE_HIGH_TO_LOW)
         .containsExactlyElementsOf(expectedPricesOrder);
 

@@ -33,13 +33,13 @@ public class CheckPopularProductsSectionTest extends BaseTest {
 
     //Check that every product has price
     softAssertions.assertThat(productComponents)
-        .map(ProductComponents::getProductRegularPriceText)
+        .map(ProductComponents::getProductNewPriceText)
         .as("Product(s) do(es) not have price")
         .isNotNull();
 
     //Check that all prices bigger than 0.00
     softAssertions.assertThat(productComponents)
-        .map(ProductComponents::getProductPriceText)
+        .map(ProductComponents::getProductNewPriceText)
         .as("Product(s) have(s) price(s) equal to 0.00")
         .allMatch(price -> price.compareTo(BigDecimal.ZERO) > 0);
 

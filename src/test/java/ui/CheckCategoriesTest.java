@@ -1,13 +1,11 @@
 package ui;
 
-
 import static framework.enums.Categories.ACCESSORIES;
 import static framework.enums.Categories.ART;
 import static framework.enums.Categories.CLOTHES;
 
 import framework.pages.MainPage;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;

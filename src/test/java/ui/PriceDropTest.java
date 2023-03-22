@@ -28,7 +28,7 @@ public class PriceDropTest extends BaseTest {
         .doesNotContainNull();
 
     softAssertions.assertThat(products)
-        .map(ProductComponents::getProductPrice)
+        .map(ProductComponents::getProductNewPrice)
         .as("Product(s) do(es) not have [new price]")
         .doesNotContainNull();
 
@@ -36,7 +36,7 @@ public class PriceDropTest extends BaseTest {
     List<BigDecimal> expectedPricesAfterCalculation = checkCalculationOfDiscountedPrice(products);
 
     softAssertions.assertThat(products)
-        .map(ProductComponents::getProductPriceText)
+        .map(ProductComponents::getProductNewPriceText)
         .as("Promo [price] is not calculated correctly")
         .containsExactlyElementsOf(expectedPricesAfterCalculation);
 

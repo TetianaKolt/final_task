@@ -45,27 +45,27 @@ public class BasePage {
     action.moveToElement(element).build().perform();
   }
 
-  protected WebElement waitUntilClickable(By locator, int seconds) {
-    return new WebDriverWait(getDriver(), seconds).until(
-        ExpectedConditions.elementToBeClickable(locator));
-  }
+//  protected WebElement waitUntilClickable(By locator, int seconds) {
+//    return new WebDriverWait(getDriver(), seconds).until(
+//        ExpectedConditions.elementToBeClickable(locator));
+//  }
 
-  protected WebElement waitUntilVisible(By locator, int seconds) {
+  public static WebElement waitUntilVisible(By locator, int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.visibilityOfElementLocated(locator));
   }
 
-  protected WebElement waitUntilEnabled(By locator, By childLocator, int seconds) {
-    return new WebDriverWait(getDriver(), 3).until(
-        ExpectedConditions.presenceOfNestedElementLocatedBy(locator, childLocator));
-  }
+//  protected WebElement waitUntilEnabled(By locator, By childLocator, int seconds) {
+//    return new WebDriverWait(getDriver(), 3).until(
+//        ExpectedConditions.presenceOfNestedElementLocatedBy(locator, childLocator));
+//  }
 
-  protected WebElement waitUntilPresent(By locator, int seconds) {
+  public WebElement waitUntilPresent(By locator, int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.presenceOfElementLocated(locator));
   }
 
-  protected void waitUntilPageIsLoaded() {
+  public static void waitUntilPageIsLoaded() {
     ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
         .equals("complete");
   }

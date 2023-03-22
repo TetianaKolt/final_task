@@ -140,6 +140,7 @@ public class MainPage extends BasePage {
   @Step
   public PricesDropPage clickPricesDrop() {
     find(priceDropButtonLocator).click();
+    waitUntilPageIsLoaded();
     return new PricesDropPage();
   }
 
