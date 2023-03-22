@@ -44,7 +44,7 @@ public class RegistrationWithInvalidDataTest extends BaseTest {
         .isTrue();
 
     String actualErrorMessageText = accountPage.errorMessageGetText();
-    String expectedErrorMessageText = "Invalid name";
+    String expectedErrorMessageText = "Invalid format.";
 
     softAssertions.assertThat(actualErrorMessageText)
         .as("The error text is not as expected")

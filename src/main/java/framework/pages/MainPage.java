@@ -33,24 +33,28 @@ public class MainPage extends BasePage {
   private final By accessoriesSubcategoryLocator = By.xpath("//li[@id='category-6']"
       + "//a[@class='dropdown-item dropdown-submenu']");
 
+  private final By languagesInDropdownLocator = By.xpath("//*[@class='dropdown-item']");
   private final By productComponentsLocator = By.xpath("//div[@class='product-description']");
   private final By priceDropButtonLocator = By.id("link-product-page-prices-drop-1");
   private final By allProductsButtonLocator = By.xpath("//a[contains(text(),'All products')]");
 
-
+  @Step
   public MainPage goToTheBottom() {
     scrollToElement(find(footerLocator));
     return this;
   }
 
+  @Step
   public FooterComponents getFooterComponents() {
     return new FooterComponents(find(footerLocator));
   }
 
+  @Step
   public HeaderComponents getHeaderComponents() {
     return new HeaderComponents(find(headerContainer));
   }
 
+  @Step
   public List<ProductComponents> getProductComponents() {
     scrollToElement(find(By.xpath("//section[@class='featured-products clearfix']")));
     waitUntilVisible(By.xpath("//div[@class='thumbnail-top']"), 5);
@@ -67,6 +71,7 @@ public class MainPage extends BasePage {
     return getFooterComponents().getTextUnderEmailInputText();
   }
 
+  @Step
   public boolean checkTextInSubscribeButton() {
     return getFooterComponents().getSubscribeButton().getCssValue("text-transform")
         .equals("uppercase");
@@ -75,21 +80,25 @@ public class MainPage extends BasePage {
   @Step
   public List<String> getLanguageList() {
     getHeaderComponents().getLanguageButton().click();
-    return findAll(By.xpath("//*[@class='dropdown-item']")).stream()
+    waitUntilVisible(languagesInDropdownLocator,3);
+    return findAll(languagesInDropdownLocator).stream()
         .map(WebElement::getText)
         .collect(Collectors.toList());
   }
 
   @Step
   public boolean checkIfLanguageExistsInList(String languageToFind) {
+    System.out.println("Language to find: " + languageToFind);
     return getLanguageList().contains(languageToFind);
   }
 
+  @Step
   public LogInPage clickOnSignInButton() {
     getHeaderComponents().getSignInOutUserInfo().click();
     return new LogInPage();
   }
 
+  @Step
   public String checkNameNearCart() {
     waitUntilPageIsLoaded();
     return getHeaderComponents()
@@ -98,6 +107,7 @@ public class MainPage extends BasePage {
         .getText();
   }
 
+  @Step
   public List<String> getAllSubCategories(Categories category) {
     hoverOverElement(By.xpath(category.getLocator()));
     getDriver().switchTo().activeElement();
@@ -121,16 +131,19 @@ public class MainPage extends BasePage {
     }
   }
 
+  @Step
   public MainPage goToTheFooter() {
     scrollToElement(find(By.id("footer")));
     return this;
   }
 
+  @Step
   public PricesDropPage clickPricesDrop() {
     find(priceDropButtonLocator).click();
     return new PricesDropPage();
   }
 
+  @Step
   public HomePage clickAllProducts() {
     WebElement allProductsButton = find(allProductsButtonLocator);
     scrollToElement(allProductsButton);
@@ -138,6 +151,7 @@ public class MainPage extends BasePage {
     return new HomePage();
   }
 
+  @Step
   public SearchResultsPage searchProductByText(String wordToSearch) {
     WebElement searchField = getHeaderComponents().getSearchField();
     Actions actions = new Actions(getDriver());

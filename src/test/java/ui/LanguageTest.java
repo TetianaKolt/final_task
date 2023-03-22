@@ -23,11 +23,11 @@ public class LanguageTest extends BaseTest {
         .isEqualTo(expectedQuantityOfLanguages);
 
     //Check that 'Українська' language exist in dropdown
-    boolean exists = mainPage.checkIfLanguageExistsInList("Укіраїнська");
+    String languageToLookFor = "Українська";
+    boolean exists = mainPage.checkIfLanguageExistsInList(languageToLookFor);
     softAssertions.assertThat(exists)
-        .as("The language is not in the list")
+        .as("The language ["+languageToLookFor+"] is not in the list")
         .isTrue();
-
     softAssertions.assertAll();
 
   }

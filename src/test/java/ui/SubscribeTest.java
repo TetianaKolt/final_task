@@ -22,7 +22,7 @@ public class SubscribeTest extends BaseTest {
         .as("Actual text near the email field in the bottom differs from expected")
         .isEqualTo(expectedTextNearEmailFieldInTheBottom);
 
-    //On the buttom of the page check that text under email field contains 'You may unsubscribe at any moment.
+    //On the bottom of the page check that text under email field contains 'You may unsubscribe at any moment.
     // For that purpose, please find my contact info in the legal notice.'
     String actualTextUnderEmailFieldInTheBottom = mainPage.goToTheBottom()
         .getTextUnderEmail();
