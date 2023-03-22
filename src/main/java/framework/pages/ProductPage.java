@@ -4,7 +4,6 @@ import framework.components.HeaderComponents;
 import framework.components.ProductDetailsComponent;
 import framework.enums.ColorOptions;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -32,11 +31,18 @@ public class ProductPage extends BasePage {
 
   public ProductPage changeQuantityTo(int quantity) {
     WebElement quantityEl = getProductDetailsComponents().getProductQuantityWanted();
-///////// ????????????????????????????????????????
-//    quantityEl.clear();
-    JavascriptExecutor js = (JavascriptExecutor) getDriver();
-    js.executeScript("arguments[0].value = '';", quantityEl);
-    quantityEl.sendKeys(String.valueOf(quantity));
+    WebElement quantityButtonUp = getProductDetailsComponents().getButtonQuantityUp();
+
+/////// ????????????????????????????????????????
+    quantityEl.clear();
+    for (int i = 0; i < quantity; i++) {
+      quantityButtonUp.click();
+    }
+
+//    JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//    js.executeScript("arguments[0].value = '';", quantityEl);
+
+//    quantityEl.sendKeys(String.valueOf(quantity));
     return this;
   }
 

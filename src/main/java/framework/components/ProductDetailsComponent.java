@@ -15,13 +15,15 @@ public class ProductDetailsComponent {
   private final WebElement priceEl;
   private final BigDecimal price;
   private final String taxLabel;
-//  private final String productDescription;
+  //  private final String productDescription;
   private WebElement productVariants;
   private WebElement selectProductOptions;
   private WebElement productCustomizationInput;
   private WebElement saveCustomizationButton;
   private WebElement productColorEl;
   private final WebElement productQuantityWanted;
+  private final WebElement buttonQuantityUp;
+  private final WebElement buttonQuantityDown;
   private final WebElement addToCartButton;
   private final WebElement addToWishListButton;
 
@@ -41,10 +43,9 @@ public class ProductDetailsComponent {
     try {
       this.productVariants = container.findElement
           (By.xpath("//div[@class='clearfix product-variants-item']//span"));
-    }catch (Exception e){
+    } catch (Exception e) {
       this.productVariants = null;
     }
-
 
     try {
       this.selectProductOptions = container.findElement(
@@ -70,12 +71,21 @@ public class ProductDetailsComponent {
     try {
       this.productColorEl = container.findElement(
           By.xpath("//span[contains(text(),'Color')]/parent::div"));
-    }catch (Exception e){
+    } catch (Exception e) {
       this.productColorEl = null;
     }
 
     this.productQuantityWanted = container.findElement(
         By.xpath("//input[@id='quantity_wanted']"));
+
+
+    this.buttonQuantityUp = container.findElement(
+        By.xpath(".//button[@class='btn btn-touchspin "
+            + "js-touchspin bootstrap-touchspin-up']"));
+    this.buttonQuantityDown = container.findElement(
+        By.xpath(".//button[@class='btn btn-touchspin "
+            + "js-touchspin bootstrap-touchspin-down']"));
+
     this.addToCartButton = container.findElement(
         By.xpath("//button[@class='btn btn-primary add-to-cart']"));
     this.addToWishListButton = container.findElement(
