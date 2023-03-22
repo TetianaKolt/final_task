@@ -26,25 +26,25 @@ public class CartComponents {
   public CartComponents(WebElement cartContainer) {
     /////
     this.cartProductContainerLocator = cartContainer.findElements(
-        By.xpath(".//li[@class='cart-item']"));
+        By.xpath("//li[@class='cart-item']"));
     //////
 
     this.totalQuantityInCartEl = cartContainer.findElement(
-        By.xpath(".//span[@class='label js-subtotal']"));
+        By.xpath("//span[@class='label js-subtotal']"));
     this.totalQuantityInCart = getDigits(totalQuantityInCartEl);
     this.priceValueEl = cartContainer.findElement(
-        By.xpath(".//div[@id='cart-subtotal-products']//span[@class='value']"));
+        By.xpath("//div[@id='cart-subtotal-products']//span[@class='value']"));
     this.priceValue = getDigits(priceValueEl);
     this.shippingValueEl = cartContainer.findElement(
-        By.xpath(".//div[@id='cart-subtotal-shipping']//span[@class='value']"));
+        By.xpath("//div[@id='cart-subtotal-shipping']//span[@class='value']"));
     this.shippingValue = getDigits(shippingValueEl);
     this.totalSumEl = cartContainer.findElement(
-        By.xpath(".//div[@class='cart-summary-line cart-total']//span[@class='value']"));
+        By.xpath("//div[@class='cart-summary-line cart-total']//span[@class='value']"));
     this.totalSum = getDigits(totalSumEl);
     this.continueShoppingButton = cartContainer.findElement(
-        By.xpath(".//a[@class='label']/i[@class='material-icons']"));
+        By.xpath("//a[@class='label']/i[@class='material-icons']"));
     this.proceedToCheckoutButton = cartContainer.findElement(
-        By.xpath(".//a[contains(text(),'checkout')]"));
+        By.xpath("//a[contains(text(),'checkout')]"));
   }
 
   @Getter

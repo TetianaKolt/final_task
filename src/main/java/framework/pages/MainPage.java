@@ -7,6 +7,7 @@ import framework.components.HeaderComponents;
 import framework.components.ProductComponents;
 import framework.enums.Categories;
 import io.qameta.allure.Step;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -27,10 +28,10 @@ public class MainPage extends BasePage {
   private final By nameNextToCartLocator = By.xpath(
       "//a[@class='account']//*[@class='hidden-sm-down']");
   private final By headerContainer = By.id("header");
-  private final By clothesSubcategoryLocator = By.xpath(
-      " //div[@id='top_sub_menu_45451']//ul[@class='top-menu']/li");
-  private final By accessoriesSubcategoryLocator = By.xpath(
-      "//div[@id='top_sub_menu_48259']//ul[@class='top-menu']/li");
+  private final By clothesSubcategoryLocator = By.xpath("//li[@id='category-3']"
+      + "//a[@class='dropdown-item dropdown-submenu']");
+  private final By accessoriesSubcategoryLocator = By.xpath("//li[@id='category-6']"
+      + "//a[@class='dropdown-item dropdown-submenu']");
 
   private final By productComponentsLocator = By.xpath("//div[@class='product-description']");
   private final By priceDropButtonLocator = By.id("link-product-page-prices-drop-1");
@@ -93,27 +94,10 @@ public class MainPage extends BasePage {
         .getText();
   }
 
-  public List<String> getAllCategories(Categories category) {
+  public List<String> getAllSubCategories(Categories category) {
     hoverOverElement(By.xpath(category.getLocator()));
+    getDriver().switchTo().activeElement();
 
-//    WebElement element = find(By.xpath(Categories.CLOTHES.getLocator()));
-//
-//    element.getText();
-//    List<WebElement> subcategories = element.findElements(By.xpath("//li[@id='category-3']//li/a"));
-//    subcategories.stream().map(WebElement::getText).collect(Collectors.toList());
-//
-//    List<WebElement> elements = findAll(By.cssSelector("ul.top-menu > li > a"));
-
-//    JavascriptExecutor js = (JavascriptExecutor) getDriver();
-//    // String innerText = js.executeScript(" return document.documentElement.innerText;").toString();
-//    String innerText = js.executeScript("return document.querySelector('ul.top-menu').innerText;").toString();
-//    List<String> menuTexts = new ArrayList<String>();
-//    String[] menuItems = innerText.split("\\n");
-//    for (String item : menuItems) {
-//      if (item.equals("MEN") || item.equals("WOMEN")) {
-//        menuTexts.add(item);
-//      }
-//    }
     switch (category) {
       case CLOTHES:
         return findAll(clothesSubcategoryLocator).stream()
@@ -124,8 +108,13 @@ public class MainPage extends BasePage {
         return findAll(accessoriesSubcategoryLocator).stream()
             .map(WebElement::getText)
             .collect(Collectors.toList());
+
+      case ART:
+        return new ArrayList<>();
+
+      default:
+        return null;
     }
-    return null;
   }
 
   public MainPage goToTheFooter() {
@@ -146,7 +135,7 @@ public class MainPage extends BasePage {
   }
 
   public SearchResultsPage searchProductByText(String wordToSearch) {
-    WebElement searchField  = getHeaderComponents().getSearchField();
+    WebElement searchField = getHeaderComponents().getSearchField();
     Actions actions = new Actions(getDriver());
     actions.moveToElement(searchField)
         .click().sendKeys(wordToSearch)

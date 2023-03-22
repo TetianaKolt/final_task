@@ -1,6 +1,10 @@
 package ui;
 
 import static framework.enums.ColorOptions.BLACK;
+import static framework.helpers.FakeStringsHelper.generateFakeDate;
+import static framework.helpers.FakeStringsHelper.generateFakeEmail;
+import static framework.helpers.FakeStringsHelper.generateFakeFirstName;
+import static framework.helpers.FakeStringsHelper.generateFakeLastName;
 
 import framework.pages.CartPage;
 import framework.pages.MainPage;
@@ -21,7 +25,6 @@ public class CheckOutEndToEndTest extends BaseTest {
     String anotherProductToSearch = "T-Shirt";
     String anotherProductToClick = "Hummingbird Printed T-Shirt";
 
-
     //In the search field enter 'Mug' and press 'Enter'
     //On the 'SEARCH RESULTS' page click on 'Customizable Mug'
 
@@ -33,7 +36,7 @@ public class CheckOutEndToEndTest extends BaseTest {
     //Click 'ADD TO CART' button
     //On the next window click 'CONTINUE SHOPPING'
 
-   CartPage cart = product.customizeProduct(phraseToCustomize)
+    CartPage cart = product.customizeProduct(phraseToCustomize)
         .changeQuantityTo(1)
         .clickAddToCart()
         .clickContinueShopping()
@@ -57,6 +60,22 @@ public class CheckOutEndToEndTest extends BaseTest {
         .isEqualTo(cart.checkTotalIsCorrect());
 
     //Click 'PROCEED TO CHECKOUT'
+
+    String userFirstName = generateFakeFirstName();
+    String userLastName = generateFakeLastName();
+    String userEmail = generateFakeEmail();
+    String userBirthDate = generateFakeDate();
+
+    cart.clickProceedToCheckoutToPersonalInfo()
+        .fillFirstName(userFirstName)
+        .fillLastName(userLastName)
+        .fillEmail(userEmail)
+        .fillBirthDate(userBirthDate)
+        .tickCustomerDataPrivacyCheckbox()
+        .tickIAgreeCheckbox()
+        .clickContinue();
+
+
     //Fill 'PERSONAL INFORMATION' form with valid data (without password)
     //Check all necessary checkboxes
     //Click 'CONTINUE'

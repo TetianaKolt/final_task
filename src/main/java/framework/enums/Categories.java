@@ -10,7 +10,6 @@ public enum Categories {
 
   private final String locator;
 
-
   Categories(String locator) {
     this.locator = locator;
   }

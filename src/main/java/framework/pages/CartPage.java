@@ -1,6 +1,5 @@
 package framework.pages;
 
-import static framework.helpers.Helpers.checkTotalCalculationPriceQuantity;
 import static framework.helpers.Helpers.checkTotalCalculationSubtotalShippingFee;
 
 import framework.components.CartComponents;
@@ -21,6 +20,11 @@ public class CartPage extends BasePage {
     return new CartModalWindowComponent(find(cartModalWindowLocator));
   }
 
+  public CartComponents getCartComponents() {
+    return new CartComponents(find(cartContainerLocator));
+  }
+
+
   public ProductPage clickContinueShopping() {
     getCartModalWindowComponents()
         .getContinueShoppingButton()
@@ -35,9 +39,13 @@ public class CartPage extends BasePage {
     return this;
   }
 
-  public CartComponents getCartComponents() {
-    return new CartComponents(find(cartContainerLocator));
+  public PersonalInformationPage clickProceedToCheckoutToPersonalInfo() {
+    getCartModalWindowComponents()
+        .getProceedToCheckoutButton()
+        .click();
+    return new PersonalInformationPage();
   }
+
 
   public BigDecimal checkTotalIsCorrect() {
     return checkTotalCalculationSubtotalShippingFee(
