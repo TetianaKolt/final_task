@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class SubscribeTest extends BaseTest {
 
- private final MainPage mainPage = new MainPage();
+  private final MainPage mainPage = new MainPage();
 
 
   @Test
@@ -22,7 +22,8 @@ public class SubscribeTest extends BaseTest {
         .as("Actual text near the email field in the bottom differs from expected")
         .isEqualTo(expectedTextNearEmailFieldInTheBottom);
 
-    //On the bottom of the page check that text under email field contains 'You may unsubscribe at any moment.
+    //On the bottom of the page check that text under email field contains
+    // 'You may unsubscribe at any moment.
     // For that purpose, please find my contact info in the legal notice.'
     String actualTextUnderEmailFieldInTheBottom = mainPage.goToTheBottom()
         .getTextUnderEmail();
@@ -34,10 +35,10 @@ public class SubscribeTest extends BaseTest {
         .isEqualTo(expectedTextUnderEmailInTheBottom);
 
     // Check that all characters on 'SUBSCRIBE' button in upper case
-    boolean actualSubscribeTest = mainPage.checkTextInSubscribeButton();
-    softAssertions.assertThat(actualSubscribeTest)
-        .as("Text is not in uppercase " +  actualSubscribeTest)
-        .isEqualTo(true);
+    boolean isSubscribeTextInUpperCase = mainPage.checkIfTextInSubscribeButtonIsUpperCase();
+    softAssertions.assertThat(isSubscribeTextInUpperCase)
+        .as("Text is not in uppercase " + isSubscribeTextInUpperCase)
+        .isTrue();
 
     softAssertions.assertAll();
   }

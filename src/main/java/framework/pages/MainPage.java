@@ -72,7 +72,7 @@ public class MainPage extends BasePage {
   }
 
   @Step
-  public boolean checkTextInSubscribeButton() {
+  public boolean checkIfTextInSubscribeButtonIsUpperCase() {
     return getFooterComponents().getSubscribeButton().getCssValue("text-transform")
         .equals("uppercase");
   }

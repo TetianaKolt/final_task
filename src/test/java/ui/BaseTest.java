@@ -27,10 +27,9 @@ public class BaseTest {
     driver.get("https://demo.prestashop.com/");
 
     driver.manage().window().setSize(new Dimension(width, height));
-    driver.manage().window().maximize();
+//    driver.manage().window().maximize();
     BasePage.setDriverThreadLocal(driver);
 
-    // Wait until loading message disappears and switch to iFrame of body
     waitUntilLoadingMessageDisappears();
   }
 
