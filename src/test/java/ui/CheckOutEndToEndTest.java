@@ -1,14 +1,21 @@
 package ui;
 
 import static framework.enums.ColorOptions.BLACK;
+import static framework.helpers.FakeStringsHelper.generateFakeCity;
 import static framework.helpers.FakeStringsHelper.generateFakeDate;
 import static framework.helpers.FakeStringsHelper.generateFakeEmail;
 import static framework.helpers.FakeStringsHelper.generateFakeFirstName;
 import static framework.helpers.FakeStringsHelper.generateFakeLastName;
+import static framework.helpers.FakeStringsHelper.generateFakePostalCode;
+import static framework.helpers.FakeStringsHelper.generateFakeStreetAddress;
+import static framework.helpers.Helpers.checkTotalCalculationSubtotalShippingFee;
 
 import framework.pages.CartPage;
 import framework.pages.MainPage;
+import framework.pages.OrderConfirmationPage;
+import framework.pages.PersonalInformationPage;
 import framework.pages.ProductPage;
+import java.math.BigDecimal;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
@@ -66,15 +73,49 @@ public class CheckOutEndToEndTest extends BaseTest {
     String userEmail = generateFakeEmail();
     String userBirthDate = generateFakeDate();
 
-    cart.clickProceedToCheckoutToPersonalInfo()
-        .fillFirstName(userFirstName)
-        .fillLastName(userLastName)
-        .fillEmail(userEmail)
-        .fillBirthDate(userBirthDate)
-        .tickCustomerDataPrivacyCheckbox()
-        .tickIAgreeCheckbox()
-        .clickContinue();
+    PersonalInformationPage personalInformation =
+        cart.clickProceedToCheckoutToPersonalInfo()
+            .fillFirstName(userFirstName)
+            .fillLastName(userLastName)
+            .fillEmail(userEmail)
+            .fillBirthDate(userBirthDate)
+            .tickCustomerDataPrivacyCheckbox()
+            .tickIAgreeCheckbox()
+            .clickContinueToAddress()
+            .fillInAddress(generateFakeStreetAddress(), generateFakePostalCode(),
+                generateFakeCity())
+            .clickContinueToShippingMethod()
+            .chooseRadioButtonMyCarrier()
+            .clickContinueToPayment();
 
+    BigDecimal actualAmount = personalInformation.selectPayByCheck();
+
+    BigDecimal expectedAmount = checkTotalCalculationSubtotalShippingFee(
+        personalInformation.getPersonalInfoPayment().getSubTotalSum(),
+        personalInformation.getPersonalInfoPayment().getShippingSum());
+
+    softAssertions.assertThat(actualAmount)
+        .as("Actual amount is not calculated correctly")
+        .isEqualTo(expectedAmount);
+
+    OrderConfirmationPage confirmationPage = personalInformation
+        .clickIAgreeCheckBox()
+        .clickOnPlaceOrder();
+
+    String actualTitle = confirmationPage.getTitleName();
+    String expectedTitle = "YOUR ORDER IS CONFIRMED";
+
+    softAssertions.assertThat(actualTitle)
+        .as("Title is not as expected")
+        .isEqualTo(expectedTitle);
+
+    BigDecimal actualTotalPrice = confirmationPage.getTotalTaxIncl();
+    BigDecimal expectedTotalPrice = checkTotalCalculationSubtotalShippingFee(
+        confirmationPage.getSubTotal(), confirmationPage.getShippingAndHandlingPrice());
+
+    softAssertions.assertThat(actualTotalPrice)
+        .as("Total is not calculated correctly")
+        .isEqualTo(expectedTotalPrice);
 
     //Fill 'PERSONAL INFORMATION' form with valid data (without password)
     //Check all necessary checkboxes

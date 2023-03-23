@@ -32,7 +32,7 @@ public class CartModalWindowComponent {
 
   public CartModalWindowComponent(WebElement container) {
     this.modalTitle = container.findElement
-        (By.xpath("//h4[@id='myModalLabel']")).getText().substring(1);
+        (By.xpath("//h4[@id='myModalLabel']")).getText();
     this.productImage = container.findElement
         (By.xpath("//div[@class='col-md-6']/img"));
     this.productName = container.findElement

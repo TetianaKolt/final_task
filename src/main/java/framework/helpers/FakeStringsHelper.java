@@ -1,7 +1,6 @@
 package framework.helpers;
 
 import com.github.javafaker.Faker;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,6 +22,18 @@ public class FakeStringsHelper {
 
   public static String generateFakePassword() {
     return faker.internet().password();
+  }
+
+  public static String generateFakeStreetAddress() {
+    return faker.address().streetAddressNumber();
+  }
+
+  public static String generateFakePostalCode() {
+    return faker.address().countryCode();
+  }
+
+  public static String generateFakeCity() {
+    return faker.address().cityName();
   }
 
   public static String generateScreenshotName() {

@@ -3,7 +3,6 @@ package framework.pages;
 import static framework.helpers.Helpers.getAllProducts;
 
 import framework.components.ProductComponents;
-import framework.components.ProductDetailsComponent;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.By;
@@ -15,7 +14,7 @@ public class SearchResultsPage extends BasePage {
 
 
   public List<ProductComponents> getProductComponents() {
-    waitUntilPresent(productsContainerLocator, 5);
+    waitUntilPageIsLoaded();
     return getAllProducts(productsContainerLocator);
   }
 
@@ -24,6 +23,8 @@ public class SearchResultsPage extends BasePage {
         .stream()
         .filter(pr -> pr.getProductTitleText().contains(title))
         .collect(Collectors.toList());
+
+//    waitUntilTextIsPresent(find(productsContainerLocator),title,4);
     collect.get(0).getProductTitleElement().click();
   return new ProductPage();
   }

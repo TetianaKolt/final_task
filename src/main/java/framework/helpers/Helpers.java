@@ -70,10 +70,10 @@ public class Helpers {
   public static BigDecimal checkTotalCalculationPriceQuantity(BigDecimal originalPrice, BigDecimal quantity, BigDecimal shippingFee){
     return originalPrice
         .multiply(quantity)
-        .subtract(shippingFee);
+        .add(shippingFee);
   }
   public static BigDecimal checkTotalCalculationSubtotalShippingFee(BigDecimal subTotal, BigDecimal shippingFee){
-    return subTotal.subtract(shippingFee);
+    return subTotal.add(shippingFee);
   }
 
   //// Get all products

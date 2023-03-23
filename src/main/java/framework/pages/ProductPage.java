@@ -6,7 +6,10 @@ import framework.enums.ColorOptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage extends BasePage {
 
@@ -47,6 +50,8 @@ public class ProductPage extends BasePage {
   }
 
   public CartPage clickAddToCart() {
+    Wait wait = new WebDriverWait(getDriver(), 5);
+    wait.until(ExpectedConditions.elementToBeClickable(getProductDetailsComponents().getAddToCartButton()));
     try {
       getProductDetailsComponents().getAddToCartButton().click();
     } catch (StaleElementReferenceException e) {

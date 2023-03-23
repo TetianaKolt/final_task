@@ -6,6 +6,9 @@ import framework.components.CartComponents;
 import framework.components.CartModalWindowComponent;
 import java.math.BigDecimal;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CartPage extends BasePage {
 
@@ -14,9 +17,11 @@ public class CartPage extends BasePage {
   private final By cartContainerLocator = By.id("main");
 
   public CartModalWindowComponent getCartModalWindowComponents() {
-    waitUntilPresent(cartModalWindowLocator, 3);
     getDriver().switchTo().activeElement();
-    waitUntilVisible(cartModalWindowLocator, 5);
+    waitUntilPageIsLoaded();
+//    waitUntilVisible(cartModalWindowLocator, 5);
+    Wait wait = new WebDriverWait(getDriver(), 5);
+    wait.until(ExpectedConditions.presenceOfElementLocated(cartModalWindowLocator));
     return new CartModalWindowComponent(find(cartModalWindowLocator));
   }
 

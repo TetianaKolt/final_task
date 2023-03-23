@@ -55,10 +55,10 @@ public class BasePage {
         ExpectedConditions.visibilityOfElementLocated(locator));
   }
 
-//  protected WebElement waitUntilEnabled(By locator, By childLocator, int seconds) {
-//    return new WebDriverWait(getDriver(), 3).until(
-//        ExpectedConditions.presenceOfNestedElementLocatedBy(locator, childLocator));
-//  }
+  public static Boolean waitUntilTextIsPresent(WebElement webElement, String text, int seconds) {
+    return new WebDriverWait(getDriver(), seconds).until(
+        ExpectedConditions.textToBePresentInElement(webElement, text));
+  }
 
   public WebElement waitUntilPresent(By locator, int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
