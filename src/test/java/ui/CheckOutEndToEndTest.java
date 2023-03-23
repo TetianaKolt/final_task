@@ -64,9 +64,23 @@ public class CheckOutEndToEndTest extends BaseTest {
     SoftAssertions softAssertions = new SoftAssertions();
     softAssertions.assertThat(cart.getCartComponents().getTotalSum())
         .as("Calculation is not correct")
-        .isEqualTo(cart.checkTotalIsCorrect());
+        .isEqualTo(cart.calculateTotal());
 
     //Click 'PROCEED TO CHECKOUT'
+
+    //Fill 'PERSONAL INFORMATION' form with valid data (without password)
+    //Check all necessary checkboxes
+    //Click 'CONTINUE'
+    //Fill the 'ADDRESSES' form with valid data
+    //Click 'CONTINUE'
+    //On the 'SHIPPING METHOD' section select 'My carrier'
+    //Click 'CONTINUE'
+    //On the 'PAYMENT' section select 'Pay by Check'
+    //Check that Amount equal Subtotal+Shipping
+    //Click on 'I agree..' checkbox
+    //Click on 'Order with an obligation to pay'
+    //Check that 'YOUR ORDER IS CONFIRMED' appeared on the next page
+    //Check that 'TOTAL' calculated correct
 
     String userFirstName = generateFakeFirstName();
     String userLastName = generateFakeLastName();
@@ -117,19 +131,6 @@ public class CheckOutEndToEndTest extends BaseTest {
         .as("Total is not calculated correctly")
         .isEqualTo(expectedTotalPrice);
 
-    //Fill 'PERSONAL INFORMATION' form with valid data (without password)
-    //Check all necessary checkboxes
-    //Click 'CONTINUE'
-    //Fill the 'ADDRESSES' form with valid data
-    //Click 'CONTINUE'
-    //On the 'SHIPPING METHOD' section select 'My carrier'
-    //Click 'CONTINUE'
-    //On the 'PAYMENT' section select 'Pay by Check'
-    //Check that Amount equal Subtotal+Shipping
-    //Click on 'I agree..' checkbox
-    //Click on 'Order with an obligation to pay'
-    //Check that 'YOUR ORDER IS CONFIRMED' appeared on the next page
-    //Check that 'TOTAL' calculated correct
     softAssertions.assertAll();
   }
 
