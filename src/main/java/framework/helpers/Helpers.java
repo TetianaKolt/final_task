@@ -60,29 +60,27 @@ public class Helpers {
   public static BigDecimal getDigits(WebElement el) {
     String text = el.getText();
     String price = text.replaceAll("[^\\d.]", "");
-    if(price.equals("")){
+    if (price.equals("")) {
       return BigDecimal.ZERO;
     }
     return new BigDecimal(price);
   }
 
   // Check TOTAL calculation
-  public static BigDecimal checkTotalCalculationPriceQuantity(BigDecimal originalPrice, BigDecimal quantity, BigDecimal shippingFee){
+  public static BigDecimal checkTotalCalculationPriceQuantity(BigDecimal originalPrice,
+      BigDecimal quantity, BigDecimal shippingFee) {
     return originalPrice
         .multiply(quantity)
         .add(shippingFee);
   }
-  public static BigDecimal checkTotalCalculationSubtotalShippingFee(BigDecimal subTotal, BigDecimal shippingFee){
+
+  public static BigDecimal checkTotalCalculationSubtotalShippingFee(BigDecimal subTotal,
+      BigDecimal shippingFee) {
     return subTotal.add(shippingFee);
   }
 
   //// Get all products
   public static List<ProductComponents> getAllProducts(By containerLocator) {
-//    return BasePage.findAll(containerLocator).stream()
-//        .map(ProductComponents::new)
-//        .collect(Collectors.toList());
-
-
     List<ProductComponents> products = new ArrayList<>();
     List<WebElement> containers = BasePage.findAll(containerLocator);
 
@@ -92,7 +90,6 @@ public class Helpers {
     }
     return products;
   }
-
 
   public static List<BigDecimal> checkCalculationOfDiscountedPrice(
       List<ProductComponents> products) {
@@ -105,6 +102,5 @@ public class Helpers {
         })
         .collect(Collectors.toList());
   }
-
 
 }

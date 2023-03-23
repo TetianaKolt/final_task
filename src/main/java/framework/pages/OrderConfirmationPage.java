@@ -16,8 +16,7 @@ public class OrderConfirmationPage extends BasePage {
       "//tr[@class='total-value font-weight-bold']/td[2]");
 
 
-
-  public String getTitleName(){
+  public String getTitleName() {
     return find(titleOrderIsConfirmed).getText().substring(1);
   }
 

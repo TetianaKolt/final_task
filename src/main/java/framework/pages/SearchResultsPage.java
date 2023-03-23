@@ -26,7 +26,7 @@ public class SearchResultsPage extends BasePage {
 
 //    waitUntilTextIsPresent(find(productsContainerLocator),title,4);
     collect.get(0).getProductTitleElement().click();
-  return new ProductPage();
+    return new ProductPage();
   }
 
 }

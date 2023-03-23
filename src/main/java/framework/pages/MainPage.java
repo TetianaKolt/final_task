@@ -1,5 +1,8 @@
 package framework.pages;
 
+import static framework.enums.Categories.SubCategories.ACCESSORIES_SUB_CATEGORIES;
+import static framework.enums.Categories.SubCategories.ART_SUB_CATEGORIES;
+import static framework.enums.Categories.SubCategories.CLOTHES_SUB_CATEGORIES;
 import static framework.helpers.Helpers.getAllProducts;
 import static framework.helpers.Helpers.scrollToElement;
 
@@ -15,6 +18,7 @@ import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
@@ -28,15 +32,13 @@ public class MainPage extends BasePage {
   private final By nameNextToCartLocator = By.xpath(
       "//a[@class='account']//*[@class='hidden-sm-down']");
   private final By headerContainer = By.id("header");
-  private final By clothesSubcategoryLocator = By.xpath("//li[@id='category-3']"
-      + "//a[@class='dropdown-item dropdown-submenu']");
-  private final By accessoriesSubcategoryLocator = By.xpath("//li[@id='category-6']"
-      + "//a[@class='dropdown-item dropdown-submenu']");
-
-  private final By languagesInDropdownLocator = By.xpath("//*[@class='dropdown-item']");
-  private final By productComponentsLocator = By.xpath("//div[@class='product-description']");
+  private final By languagesInDropdownLocator = By.xpath(
+      "//*[@class='dropdown-item']");
+  private final By productComponentsLocator = By.xpath(
+      "//div[@class='product-description']");
   private final By priceDropButtonLocator = By.id("link-product-page-prices-drop-1");
-  private final By allProductsButtonLocator = By.xpath("//a[contains(text(),'All products')]");
+  private final By allProductsButtonLocator = By.xpath(
+      "//a[contains(text(),'All products')]");
 
   @Step
   public MainPage goToTheBottom() {
@@ -80,7 +82,7 @@ public class MainPage extends BasePage {
   @Step
   public List<String> getLanguageList() {
     getHeaderComponents().getLanguageButton().click();
-    waitUntilVisible(languagesInDropdownLocator,3);
+    waitUntilVisible(languagesInDropdownLocator, 3);
     return findAll(languagesInDropdownLocator).stream()
         .map(WebElement::getText)
         .collect(Collectors.toList());
@@ -114,18 +116,23 @@ public class MainPage extends BasePage {
 
     switch (category) {
       case CLOTHES:
-        return findAll(clothesSubcategoryLocator).stream()
+        return findAll(By.xpath(CLOTHES_SUB_CATEGORIES.getSubLocators())).stream()
             .map(WebElement::getText)
             .collect(Collectors.toList());
 
       case ACCESSORIES:
-        return findAll(accessoriesSubcategoryLocator).stream()
+        return findAll(By.xpath(ACCESSORIES_SUB_CATEGORIES.getSubLocators())).stream()
             .map(WebElement::getText)
             .collect(Collectors.toList());
 
       case ART:
-        return new ArrayList<>();
-
+        try {
+          return findAll(By.xpath(ART_SUB_CATEGORIES.getSubLocators())).stream()
+              .map(WebElement::getText)
+              .collect(Collectors.toList());
+        } catch (NoSuchElementException e) {
+          return new ArrayList<>();
+        }
       default:
         return null;
     }
