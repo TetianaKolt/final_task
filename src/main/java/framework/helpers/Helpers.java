@@ -67,14 +67,14 @@ public class Helpers {
   }
 
   // Check TOTAL calculation
-  public static BigDecimal checkTotalCalculationPriceQuantity(BigDecimal originalPrice,
+  public static BigDecimal multiplyPriceByQuantityAddShipping(BigDecimal originalPrice,
       BigDecimal quantity, BigDecimal shippingFee) {
     return originalPrice
         .multiply(quantity)
         .add(shippingFee);
   }
-
-  public static BigDecimal checkTotalCalculationSubtotalShippingFee(BigDecimal subTotal,
+  // Check TOTAL calculation
+  public static BigDecimal addSubtotalToShippingFee(BigDecimal subTotal,
       BigDecimal shippingFee) {
     return subTotal.add(shippingFee);
   }

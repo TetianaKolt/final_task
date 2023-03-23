@@ -8,7 +8,7 @@ import static framework.helpers.FakeStringsHelper.generateFakeFirstName;
 import static framework.helpers.FakeStringsHelper.generateFakeLastName;
 import static framework.helpers.FakeStringsHelper.generateFakePostalCode;
 import static framework.helpers.FakeStringsHelper.generateFakeStreetAddress;
-import static framework.helpers.Helpers.checkTotalCalculationSubtotalShippingFee;
+import static framework.helpers.Helpers.addSubtotalToShippingFee;
 
 import framework.pages.CartPage;
 import framework.pages.MainPage;
@@ -90,7 +90,7 @@ public class CheckOutEndToEndTest extends BaseTest {
 
     BigDecimal actualAmount = personalInformation.selectPayByCheck();
 
-    BigDecimal expectedAmount = checkTotalCalculationSubtotalShippingFee(
+    BigDecimal expectedAmount = addSubtotalToShippingFee(
         personalInformation.getPersonalInfoPayment().getSubTotalSum(),
         personalInformation.getPersonalInfoPayment().getShippingSum());
 
@@ -110,7 +110,7 @@ public class CheckOutEndToEndTest extends BaseTest {
         .isEqualTo(expectedTitle);
 
     BigDecimal actualTotalPrice = confirmationPage.getTotalTaxIncl();
-    BigDecimal expectedTotalPrice = checkTotalCalculationSubtotalShippingFee(
+    BigDecimal expectedTotalPrice = addSubtotalToShippingFee(
         confirmationPage.getSubTotal(), confirmationPage.getShippingAndHandlingPrice());
 
     softAssertions.assertThat(actualTotalPrice)

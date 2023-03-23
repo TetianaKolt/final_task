@@ -1,6 +1,6 @@
 package framework.pages;
 
-import static framework.helpers.Helpers.checkTotalCalculationSubtotalShippingFee;
+import static framework.helpers.Helpers.addSubtotalToShippingFee;
 
 import framework.components.CartComponents;
 import framework.components.CartModalWindowComponent;
@@ -53,7 +53,7 @@ public class CartPage extends BasePage {
 
 
   public BigDecimal checkTotalIsCorrect() {
-    return checkTotalCalculationSubtotalShippingFee(
+    return addSubtotalToShippingFee(
         getCartComponents().getPriceValue(),
         getCartComponents().getShippingValue());
   }

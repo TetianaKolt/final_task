@@ -1,6 +1,6 @@
 package ui;
 
-import static framework.helpers.Helpers.checkTotalCalculationPriceQuantity;
+import static framework.helpers.Helpers.multiplyPriceByQuantityAddShipping;
 
 import framework.components.CartModalWindowComponent;
 import framework.pages.MainPage;
@@ -46,7 +46,7 @@ public class AddingToCartTest extends BaseTest {
         .isEqualTo(String.valueOf(productQuantity));
 
     //Check that 'Total' calculated correct
-    BigDecimal expectedTotal = checkTotalCalculationPriceQuantity(cartModalWindow.getProductPrice(),
+    BigDecimal expectedTotal = multiplyPriceByQuantityAddShipping(cartModalWindow.getProductPrice(),
         cartModalWindow.getSelectedQuantityInt(), cartModalWindow.getShippingValue());
 
     softAssertions.assertThat(cartModalWindow.getTotalSum())
