@@ -16,11 +16,11 @@ public class MyListener implements ITestListener {
 
   @Override
   public void onTestSuccess(ITestResult result) {
-    log.info("******************** The best test ever ********************");
   }
 
   @Override
   public void onTestFailure(ITestResult result) {
+
     Helpers.takeScreenShot(result.getName());
   }
 

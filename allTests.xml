@@ -1,20 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Run all tests" verbose="1">
-<!--  <suite name="Run all tests" verbose="1" parallel="tests">-->
+<!--<suite name="Run all tests" verbose="1">-->
+    <suite name="Run all tests" verbose="1" parallel="tests">
 
   <listeners>
     <listener class-name="framework.listeners.MyListener"/>
   </listeners>
 
-  <test name="Test #1">
+  <test name="Test #1 (Subscribe with invalid email)">
     <classes>
       <class name="ui.SubscribeTest"/>
     </classes>
   </test>
 
+  <test name="Test #2 (Check languages)">
+    <classes>
+      <class name="ui.LanguageTest"/>
+    </classes>
+  </test>
 
+  <test name="Test #3 (Registration with valid data)">
+    <classes>
+      <class name="ui.RegistrationWithValidDataTest"/>
+    </classes>
+  </test>
 
+  <test name="Test #4 (Registration with invalid data)">
+    <classes>
+      <class name="ui.RegistrationWithInvalidDataTest"/>
+    </classes>
+  </test>
+
+  <test name="Test #5 (Check categories)">
+    <classes>
+      <class name="ui.CheckCategoriesTest"/>
+    </classes>
+  </test>
+
+  <test name="Test #6 (Check popular products)">
+    <classes>
+      <class name="ui.CheckPopularProductsSectionTest"/>
+    </classes>
+  </test>
+
+  <test name="Test #7 (Price drop check)">
+    <classes>
+      <class name="ui.PriceDropTest"/>
+    </classes>
+  </test>
+
+  <test name="Test #8 (Sorting check)">
+    <classes>
+      <class name="ui.SortingTest"/>
+    </classes>
+  </test>
+
+  <test name="Test #9 (Adding to cart)">
+    <classes>
+      <class name="ui.AddingToCartTest"/>
+    </classes>
+  </test>
+
+  <test name="Test #10 (Checkout end-to-end)">
+    <classes>
+      <class name="ui.CheckOutEndToEndTest"/>
+    </classes>
+  </test>
 
 </suite>
