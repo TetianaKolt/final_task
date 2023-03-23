@@ -18,7 +18,8 @@ public class RegistrationWithInvalidDataTest extends BaseTest {
   public void registrationWithInvalidDataTest() {
     String fakeFirstName = "James8";
 
-    CreateAnAccountPage accountPage = mainPage.clickOnSignInButton()
+    CreateAnAccountPage accountPage = mainPage
+        .clickOnSignInButton()
         .clickOnNoAccountLink()
         .fillFirstName(fakeFirstName)
         .fillLastName(generateFakeLastName())
@@ -29,17 +30,17 @@ public class RegistrationWithInvalidDataTest extends BaseTest {
         .tickIAgreeCheckbox()
         .clickSaveButtonFail();
 
-    boolean actualColor = accountPage.firstNameIsHighlighted();
+    boolean isFieldHighlighted = accountPage.checkIfFirstNameIsHighlighted();
 
     SoftAssertions softAssertions = new SoftAssertions();
-    softAssertions.assertThat(actualColor)
+    softAssertions.assertThat(isFieldHighlighted)
         .as("Firstname " + fakeFirstName + " is not highlighted in red")
         .isTrue();
 
     //Check that pop-up with text 'Invalid name' appear under field
-    boolean errorMessageIsPresent = accountPage.checkIfErrorPopsUp();
+    boolean isErrorMessagePresent = accountPage.checkIfErrorPopsUp();
 
-    softAssertions.assertThat(errorMessageIsPresent)
+    softAssertions.assertThat(isErrorMessagePresent)
         .as("Error pop-up is not present")
         .isTrue();
 
@@ -52,6 +53,4 @@ public class RegistrationWithInvalidDataTest extends BaseTest {
 
     softAssertions.assertAll();
   }
-
-
 }

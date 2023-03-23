@@ -65,7 +65,7 @@ public class CreateAnAccountPage extends BasePage {
   }
 
 
-  public boolean firstNameIsHighlighted() {
+  public boolean checkIfFirstNameIsHighlighted() {
     return isHighlightedInRed(firstNameInputLocator, "outline-color");
   }
 
