@@ -5,20 +5,19 @@ import static framework.helpers.Helpers.getDigits;
 import java.math.BigDecimal;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 @Getter
 public class ProductComponents {
 
-  private WebElement productTitleElement;
-  private String productTitleText;
+  private final WebElement productTitleElement;
+  private final String productTitleText;
   private WebElement productImageElement;
   private WebElement productDiscountTag;
   private BigDecimal productDiscountTagText;
   private WebElement productRegularPrice;
   private BigDecimal productRegularPriceText;
-  //  private WebElement productPrice;
-//  private BigDecimal productPriceText;
   private WebElement productNewPrice;
   private BigDecimal productNewPriceText;
 
@@ -42,9 +41,9 @@ public class ProductComponents {
 
     try {
       this.productDiscountTag = container.findElement(
-          By.xpath(".//ul[@class='product-flags js-product-flags']/li"));
+          By.xpath(".//li[@class='product-flag discount']"));
     } catch (
-        Exception e) {
+        NoSuchElementException e) {
       productDiscountTag = null;
     }
     try {
@@ -68,19 +67,6 @@ public class ProductComponents {
       productRegularPriceText = null;
     }
 
-    /////// ????????????????????
-//    try {
-//      this.productPrice = container.findElement(By.xpath(".//span[@class='current-price-value']"));
-//    } catch (
-//        NoSuchElementException e) {
-//      this.productPrice = null;
-//    }
-//    try {
-//      this.productPriceText = getDigits(productPrice);
-//    } catch (
-//        NullPointerException e) {
-//      this.productPriceText = null;
-//    }
     try {
       this.productNewPrice = container.findElement(By.xpath(".//*[@class='price']"));
     } catch (

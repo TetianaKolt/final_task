@@ -9,20 +9,19 @@ import org.openqa.selenium.WebElement;
 
 @Getter
 public class PersonalInfoPaymentSection {
-
-  private WebElement payByCheckRadioButton;
-  private WebElement payByBankWireRadioButton;
-  private WebElement amount;
-  private BigDecimal amountSum;
-  private WebElement iAgreeCheckBox;
-  private WebElement placeOrderButton;
+  private final WebElement payByCheckRadioButton;
+  private final WebElement payByBankWireRadioButton;
+  private final WebElement amount;
+  private final BigDecimal amountSum;
+  private final WebElement iAgreeCheckBox;
+  private final WebElement placeOrderButton;
   /// right menu elements:
-  private WebElement subTotal;
-  private BigDecimal subTotalSum;
-  private WebElement shipping;
-  private BigDecimal shippingSum;
-  private WebElement totalTaxIncl;
-  private BigDecimal totalTaxInclSum;
+  private final WebElement subTotal;
+  private final BigDecimal subTotalSum;
+  private final WebElement shipping;
+  private final BigDecimal shippingSum;
+  private final WebElement totalTaxIncl;
+  private final BigDecimal totalTaxInclSum;
 
   public PersonalInfoPaymentSection(WebElement container) {
     this.payByCheckRadioButton = container.findElement(

@@ -7,11 +7,11 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class PersonalInfoShippingMethod {
 
-  private WebElement prestaShopRadioButton;
-  private WebElement prestaShopRadioButtonPrice;
-  private WebElement myCarrierRadioButton;
-  private WebElement myCarrierRadioButtonPrice;
-  private WebElement continueButton;
+  private final WebElement prestaShopRadioButton;
+  private final WebElement prestaShopRadioButtonPrice;
+  private final WebElement myCarrierRadioButton;
+  private final WebElement myCarrierRadioButtonPrice;
+  private final WebElement continueButton;
 
   public PersonalInfoShippingMethod(WebElement container) {
     this.prestaShopRadioButton = container.findElement(By.id("delivery_option_1"));

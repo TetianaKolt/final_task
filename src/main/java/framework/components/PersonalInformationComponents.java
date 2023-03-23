@@ -8,16 +8,16 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class PersonalInformationComponents {
 
-  private WebElement socialTitleRadioButtonMR;
-  private WebElement socialTitleRadioButtonMS;
-  private WebElement firstNameInput;
-  private WebElement lastNameInput;
-  private WebElement emailInput;
-  private WebElement passwordInput;
-  private WebElement birthdateInput;
-  private WebElement receiveOffersCheckBox;
-  private WebElement customerDataPrivacyCheckBox;
-  private WebElement iAgreeCheckbox;
+  private final WebElement socialTitleRadioButtonMR;
+  private final WebElement socialTitleRadioButtonMS;
+  private final WebElement firstNameInput;
+  private final WebElement lastNameInput;
+  private final WebElement emailInput;
+  private final WebElement passwordInput;
+  private final WebElement birthdateInput;
+  private final WebElement receiveOffersCheckBox;
+  private final WebElement customerDataPrivacyCheckBox;
+  private final WebElement iAgreeCheckbox;
   private WebElement continueButton;
 
   public PersonalInformationComponents(WebElement container) {

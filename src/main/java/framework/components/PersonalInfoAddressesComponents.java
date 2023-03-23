@@ -7,19 +7,18 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class PersonalInfoAddressesComponents {
 
-  private WebElement firstNameInput;
-  private WebElement lastNameInput;
-  private WebElement companyInput;
-  private WebElement VATNumberInput;
-  private WebElement addressInput;
-  private WebElement addressComplementInput;
-  private WebElement zipPostalCodeInput;
-  private WebElement cityInput;
-  private WebElement countryDropDownBox;
-  private WebElement phoneInput;
-  private WebElement checkBoxUseThisAddress;
-  private WebElement continueButton;
-
+  private final WebElement firstNameInput;
+  private final WebElement lastNameInput;
+  private final WebElement companyInput;
+  private final WebElement VATNumberInput;
+  private final WebElement addressInput;
+  private final WebElement addressComplementInput;
+  private final WebElement zipPostalCodeInput;
+  private final WebElement cityInput;
+  private final WebElement countryDropDownBox;
+  private final WebElement phoneInput;
+  private final WebElement checkBoxUseThisAddress;
+  private final WebElement continueButton;
 
   public PersonalInfoAddressesComponents(WebElement container) {
     this.firstNameInput = container.findElement(
@@ -43,6 +42,4 @@ public class PersonalInfoAddressesComponents {
     this.continueButton = container.findElement(
         By.xpath("//input[@name='submitAddress']"));
   }
-
-
 }

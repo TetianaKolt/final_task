@@ -5,6 +5,7 @@ import static framework.helpers.Helpers.getDigits;
 import java.math.BigDecimal;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 
 @Getter
@@ -15,7 +16,7 @@ public class ProductDetailsComponent {
   private final WebElement priceEl;
   private final BigDecimal price;
   private final String taxLabel;
-  //  private final String productDescription;
+  private String productDescription;
   private WebElement productVariants;
   private WebElement selectProductOptions;
   private WebElement productCustomizationInput;
@@ -38,15 +39,18 @@ public class ProductDetailsComponent {
     this.price = getDigits(priceEl);
     this.taxLabel = container.findElement
         (By.xpath("//div[@class='tax-shipping-delivery-label']")).getText().trim();
-//    this.productDescription = container.findElement(
-//        By.xpath("//div[@id='product-description-short-17']")).getText();
+    try {
+      this.productDescription = container.findElement(
+          By.xpath("//div[@id='product-description-short-17']")).getText();
+    }catch (NoSuchElementException e){
+      this.productDescription = null;
+    }
     try {
       this.productVariants = container.findElement
           (By.xpath("//div[@class='clearfix product-variants-item']//span"));
     } catch (Exception e) {
       this.productVariants = null;
     }
-
     try {
       this.selectProductOptions = container.findElement(
           By.xpath("//select[@id='group_4']"));
@@ -77,7 +81,6 @@ public class ProductDetailsComponent {
 
     this.productQuantityWanted = container.findElement(
         By.xpath("//input[@id='quantity_wanted']"));
-
 
     this.buttonQuantityUp = container.findElement(
         By.xpath(".//button[@class='btn btn-touchspin "

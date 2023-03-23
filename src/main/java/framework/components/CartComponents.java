@@ -11,24 +11,21 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class CartComponents {
 
-  private List<WebElement> cartProductContainerLocator;
-  private WebElement totalQuantityInCartEl;
-  private BigDecimal totalQuantityInCart;
-  private WebElement priceValueEl;
-  private BigDecimal priceValue;
-  private WebElement shippingValueEl;
-  private BigDecimal shippingValue;
-  private WebElement totalSumEl;
-  private BigDecimal totalSum;
-  private WebElement continueShoppingButton;
-  private WebElement proceedToCheckoutButton;
+  private final List<WebElement> cartProductContainerLocator;
+  private final WebElement totalQuantityInCartEl;
+  private final BigDecimal totalQuantityInCart;
+  private final WebElement priceValueEl;
+  private final BigDecimal priceValue;
+  private final WebElement shippingValueEl;
+  private final BigDecimal shippingValue;
+  private final WebElement totalSumEl;
+  private final BigDecimal totalSum;
+  private final WebElement continueShoppingButton;
+  private final WebElement proceedToCheckoutButton;
 
   public CartComponents(WebElement cartContainer) {
-    /////
     this.cartProductContainerLocator = cartContainer.findElements(
         By.xpath("//li[@class='cart-item']"));
-    //////
-
     this.totalQuantityInCartEl = cartContainer.findElement(
         By.xpath("//span[@class='label js-subtotal']"));
     this.totalQuantityInCart = getDigits(totalQuantityInCartEl);
@@ -50,14 +47,14 @@ public class CartComponents {
   @Getter
   public static class CartItemsComponents {
 
-    private WebElement image;
-    private String productName;
-    private WebElement productPriceEl;
-    private BigDecimal productPrice;
-    private WebElement quantity;
-    private WebElement productCalculatedPriceEL;
-    private BigDecimal productCalculatedPrice;
-    private WebElement deleteButton;
+    private final WebElement image;
+    private final String productName;
+    private final WebElement productPriceEl;
+    private final BigDecimal productPrice;
+    private final WebElement quantity;
+    private final WebElement productCalculatedPriceEL;
+    private final BigDecimal productCalculatedPrice;
+    private final WebElement deleteButton;
 
     public CartItemsComponents(WebElement cartProductContainer) {
       this.image = cartProductContainer.findElement(

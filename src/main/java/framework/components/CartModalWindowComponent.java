@@ -19,7 +19,7 @@ public class CartModalWindowComponent {
 
   private final String selectedOptions;
   private final WebElement selectedQuantity;
-  private BigDecimal selectedQuantityInt;
+  private final BigDecimal selectedQuantityInt;
   private final String cartProductCountsText;
   private final WebElement subTotalPriceEl;
   private final BigDecimal subTotalPrice;
