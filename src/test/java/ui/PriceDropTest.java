@@ -1,6 +1,6 @@
 package ui;
 
-import static framework.helpers.Helpers.checkCalculationOfDiscountedPrice;
+import static framework.helpers.Helpers.calculateDiscountedPrice;
 
 import framework.components.ProductComponents;
 import framework.pages.MainPage;
@@ -33,7 +33,7 @@ public class PriceDropTest extends BaseTest {
         .doesNotContainNull();
 
     //Check that promo price for every product calculates correct
-    List<BigDecimal> expectedPricesAfterCalculation = checkCalculationOfDiscountedPrice(products);
+    List<BigDecimal> expectedPricesAfterCalculation = calculateDiscountedPrice(products);
 
     softAssertions.assertThat(products)
         .map(ProductComponents::getProductNewPriceText)

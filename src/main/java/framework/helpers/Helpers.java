@@ -91,7 +91,7 @@ public class Helpers {
     return products;
   }
 
-  public static List<BigDecimal> checkCalculationOfDiscountedPrice(
+  public static List<BigDecimal> calculateDiscountedPrice(
       List<ProductComponents> products) {
     return products.stream()
         .map(product -> {
