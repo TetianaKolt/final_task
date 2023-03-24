@@ -32,7 +32,7 @@ public class CartModalWindowComponent {
 
   public CartModalWindowComponent(WebElement container) {
     this.modalTitle = container.findElement
-        (By.xpath("//h4[@id='myModalLabel']")).getText();
+        (By.xpath("//h4[@id='myModalLabel']")).getText().substring(1);
     this.productImage = container.findElement
         (By.xpath("//div[@class='col-md-6']/img"));
     this.productName = container.findElement
@@ -57,7 +57,6 @@ public class CartModalWindowComponent {
     this.shippingValue = getDigits(shippingValueEl);
     this.totalSumEl = container.findElement
         (By.xpath("//div[@class='cart-content']//span[@class='value']"));
-    ;
     this.totalSum = getDigits(totalSumEl);
     this.continueShoppingButton = container.findElement
         (By.xpath("//div[@class='cart-content-btn']"

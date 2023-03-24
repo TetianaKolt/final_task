@@ -1,29 +1,23 @@
 package framework.pages;
 
-import framework.components.HeaderComponents;
 import framework.components.ProductDetailsComponent;
 import framework.enums.ColorOptions;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ProductPage extends BasePage {
 
   private final By containerLocator = By.id("wrapper");
-  private final By headerContainer = By.id("header");
 
-  public HeaderComponents getHeaderComponents() {
-    return new HeaderComponents(find(headerContainer));
-  }
-
+  @Step
   public ProductDetailsComponent getProductDetailsComponents() {
     return new ProductDetailsComponent(find(containerLocator));
   }
 
+  @Step
   public ProductPage chooseProductType(String textToSelect) {
     getProductDetailsComponents().getProductVariants().click();
     Select selectValue = new Select(getProductDetailsComponents().getSelectProductOptions());
@@ -31,28 +25,20 @@ public class ProductPage extends BasePage {
     return this;
   }
 
-
+  @Step
   public ProductPage changeQuantityTo(int quantity) {
     WebElement quantityEl = getProductDetailsComponents().getProductQuantityWanted();
     WebElement quantityButtonUp = getProductDetailsComponents().getButtonQuantityUp();
-
-/////// ????????????????????????????????????????
     quantityEl.clear();
-    for (int i = 0; i < quantity; i++) {
+    for (int i = 1; i < quantity; i++) {
       quantityButtonUp.click();
     }
-
-//    JavascriptExecutor js = (JavascriptExecutor) getDriver();
-//    js.executeScript("arguments[0].value = '';", quantityEl);
-
-//    quantityEl.sendKeys(String.valueOf(quantity));
     return this;
   }
 
+  @Step
   public CartPage clickAddToCart() {
-    Wait wait = new WebDriverWait(getDriver(), 5);
-    wait.until(ExpectedConditions.elementToBeClickable(
-        getProductDetailsComponents().getAddToCartButton()));
+    waitUntilClickable(getProductDetailsComponents().getAddToCartButton(), 5);
     try {
       getProductDetailsComponents().getAddToCartButton().click();
     } catch (StaleElementReferenceException e) {
@@ -61,6 +47,7 @@ public class ProductPage extends BasePage {
     return new CartPage();
   }
 
+  @Step
   public ProductPage customizeProduct(String phraseToCustomize) {
     getProductDetailsComponents().getProductCustomizationInput()
         .sendKeys(phraseToCustomize);
@@ -68,16 +55,17 @@ public class ProductPage extends BasePage {
     return this;
   }
 
+  @Step
   public SearchResultsPage findAnotherProductByText(String productToFind) {
     MainPage mainPage = new MainPage();
     mainPage.searchProductByText(productToFind);
     return new SearchResultsPage();
   }
 
+  @Step
   public ProductPage selectColor(ColorOptions color) {
     getProductDetailsComponents().getProductColorEl()
-        .findElement(By.xpath("//label[@aria-label='" + color.getColorName()
-            + "']/input")).click();
+        .findElement(color.getLocator()).click();
     return this;
   }
 

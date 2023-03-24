@@ -59,7 +59,6 @@ public class MainPage extends BasePage {
   @Step
   public List<ProductComponents> getProductComponents() {
     scrollToElement(find(By.xpath("//section[@class='featured-products clearfix']")));
-//    waitUntilVisible(By.xpath("//div[@class='thumbnail-top']"), 5);
     waitUntilPageContentIsLoaded(5);
     return getAllProducts(productComponentsLocator);
   }

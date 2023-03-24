@@ -4,6 +4,7 @@ import static framework.helpers.Helpers.addSubtotalToShippingFee;
 
 import framework.components.CartComponents;
 import framework.components.CartModalWindowComponent;
+import io.qameta.allure.Step;
 import java.math.BigDecimal;
 import org.openqa.selenium.By;
 
@@ -14,17 +15,19 @@ public class CartPage extends BasePage {
       "//div[@id='blockcart-modal']//div[@class='modal-content']");
   private final By cartContainerLocator = By.id("main");
 
+  @Step
   public CartModalWindowComponent getCartModalWindowComponents() {
     getDriver().switchTo().activeElement();
-    waitUntilPageIsLoaded();
+    waitUntilVisible(cartModalWindowLocator, 5);
     return new CartModalWindowComponent(find(cartModalWindowLocator));
   }
 
+  @Step
   public CartComponents getCartComponents() {
     return new CartComponents(find(cartContainerLocator));
   }
 
-
+  @Step
   public ProductPage clickContinueShopping() {
     getCartModalWindowComponents()
         .getContinueShoppingButton()
@@ -32,6 +35,7 @@ public class CartPage extends BasePage {
     return new ProductPage();
   }
 
+  @Step
   public CartPage clickProceedToCheckout() {
     getCartModalWindowComponents()
         .getProceedToCheckoutButton()
@@ -39,6 +43,7 @@ public class CartPage extends BasePage {
     return this;
   }
 
+  @Step
   public PersonalInformationPage clickProceedToCheckoutToPersonalInfo() {
     getCartModalWindowComponents()
         .getProceedToCheckoutButton()
@@ -46,6 +51,7 @@ public class CartPage extends BasePage {
     return new PersonalInformationPage();
   }
 
+  @Step
   public BigDecimal calculateTotal() {
     return addSubtotalToShippingFee(
         getCartComponents().getPriceValue(),

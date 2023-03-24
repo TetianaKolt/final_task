@@ -51,6 +51,10 @@ public class BasePage {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.presenceOfElementLocated(locator));
   }
+  public static WebElement waitUntilClickable(WebElement element, int seconds) {
+    return new WebDriverWait(getDriver(), seconds).until(
+        ExpectedConditions.elementToBeClickable(element));
+  }
 
   public static void waitUntilPageContentIsLoaded(int seconds) {
     Wait wait = new WebDriverWait(getDriver(), seconds);

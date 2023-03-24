@@ -20,10 +20,9 @@ public class AddingToCartTest extends BaseTest {
     String productType = "Doted";
     int productQuantity = 5;
 
-    CartModalWindowComponent cartModalWindow = mainPage.searchProductByText(
-            wordToSearch)          //In the search field enter 'Bear' and press 'Enter'
-        .clickOnProductWithName(
-            productNameToClick)     //On the 'SEARCH RESULTS' page click on 'Brown Bear Notebook'
+    CartModalWindowComponent cartModalWindow = mainPage
+        .searchProductByText(wordToSearch)          //In the search field enter 'Bear' and press 'Enter'
+        .clickOnProductWithName(productNameToClick)     //On the 'SEARCH RESULTS' page click on 'Brown Bear Notebook'
         .chooseProductType(productType)         //Change 'Paper type' to 'Doted'
         .changeQuantityTo(productQuantity)                           //Change 'Quantity' to '5'
         .clickAddToCart().getCartModalWindowComponents();//Click 'ADD TO CART' button

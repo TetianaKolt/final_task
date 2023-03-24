@@ -20,9 +20,7 @@ public class HomePage extends BasePage {
     scrollToElement(find(By.id("js-product-list-top")));
     find(sortButtonLocator).click();
     waitUntilVisible(chooseOption.getLocator(), 10);
-//    find(By.xpath("//a[contains(text(),'" + chooseOption.getOptionText() + "')]")).click();
     find(chooseOption.getLocator()).click();
-
     waitUntilSpinnerIsInvisible(10);
     return this;
   }
