@@ -29,16 +29,13 @@ public class FakeStringsHelper {
   }
 
   public static String generateFakePostalCode() {
-    return faker.address().countryCode();
+    return faker.numerify("00000");
   }
 
   public static String generateFakeCity() {
     return faker.address().cityName();
   }
 
-  public static String generateScreenshotName() {
-    return faker.file().fileName();
-  }
 
   public static String generateFakeDate() {
     Date fakeBirthdate = faker.date().birthday();

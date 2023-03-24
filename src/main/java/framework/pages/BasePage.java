@@ -41,6 +41,10 @@ public class BasePage {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.visibilityOfElementLocated(locator));
   }
+  public static WebElement waitUntilVisible(WebElement element, int seconds) {
+    return new WebDriverWait(getDriver(), seconds).until(
+        ExpectedConditions.visibilityOf(element));
+  }
 
   public static Boolean waitUntilSpinnerIsInvisible(int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(

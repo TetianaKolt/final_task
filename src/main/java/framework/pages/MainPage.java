@@ -3,6 +3,7 @@ package framework.pages;
 import static framework.enums.Categories.SubCategories.ACCESSORIES_SUB_CATEGORIES;
 import static framework.enums.Categories.SubCategories.ART_SUB_CATEGORIES;
 import static framework.enums.Categories.SubCategories.CLOTHES_SUB_CATEGORIES;
+import static framework.helpers.Helpers.enterValueInSearchAndPressEnter;
 import static framework.helpers.Helpers.getAllProducts;
 import static framework.helpers.Helpers.scrollToElement;
 
@@ -161,12 +162,7 @@ public class MainPage extends BasePage {
   @Step
   public SearchResultsPage searchProductByText(String wordToSearch) {
     WebElement searchField = getHeaderComponents().getSearchField();
-    Actions actions = new Actions(getDriver());
-    actions.moveToElement(searchField)
-        .click().sendKeys(wordToSearch)
-        .sendKeys(Keys.ENTER)
-        .build()
-        .perform();
+    enterValueInSearchAndPressEnter(searchField, wordToSearch);
     return new SearchResultsPage();
   }
 

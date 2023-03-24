@@ -10,11 +10,11 @@ import org.openqa.selenium.By;
 public class SearchResultsPage extends BasePage {
 
   private final By productsContainerLocator = By.xpath(
-      "//div[@class='js-product product col-xs-12 col-sm-6 col-xl-3']");
+      "//div[@class='products row']/div");
 
 
   public List<ProductComponents> getProductComponents() {
-    waitUntilPageIsLoaded();
+    waitUntilPresent(productsContainerLocator,10);
     return getAllProducts(productsContainerLocator);
   }
 
@@ -23,8 +23,6 @@ public class SearchResultsPage extends BasePage {
         .stream()
         .filter(pr -> pr.getProductTitleText().contains(title))
         .collect(Collectors.toList());
-
-//    waitUntilTextIsPresent(find(productsContainerLocator),title,4);
     collect.get(0).getProductTitleElement().click();
     return new ProductPage();
   }

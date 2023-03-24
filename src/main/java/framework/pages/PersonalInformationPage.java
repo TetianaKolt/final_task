@@ -8,6 +8,8 @@ import framework.components.PersonalInfoShippingMethod;
 import framework.components.PersonalInformationComponents;
 import java.math.BigDecimal;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 
@@ -78,12 +80,24 @@ public class PersonalInformationPage extends BasePage {
   }
 
   public PersonalInformationPage clickContinueToShippingMethod() {
-    getPersonalInfoAddressesComponents().getContinueButton().click();
+    WebElement continueButton = getPersonalInfoAddressesComponents().getContinueButton();
+    scrollToElement(continueButton);
+
+    try {
+      continueButton.click();
+    } catch (ElementNotInteractableException e) {
+      JavascriptExecutor executor = (JavascriptExecutor) getDriver();
+      executor.executeScript("arguments[0].click();", continueButton);
+    }
     return this;
   }
 
   public PersonalInformationPage chooseRadioButtonMyCarrier() {
-    getPersonalInfoShipping().getMyCarrierRadioButton().click();
+
+    WebElement radioButton = getPersonalInfoShipping().getMyCarrierRadioButton();
+    waitUntilVisible(radioButton,5);
+//    scrollToElement(radioButton);
+    radioButton.click();
     return this;
   }
 

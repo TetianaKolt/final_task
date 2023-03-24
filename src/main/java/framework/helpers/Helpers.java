@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -39,6 +40,7 @@ public class Helpers {
   public static boolean isHighlightedInRed(By locator, String cssValue) {
     return find(locator).getCssValue(cssValue).equals("rgba(255, 76, 76, 1)");
   }
+
   // take a screenshot
   @Attachment(value = "{fileName}", type = "image/png")
   public static byte[] takeScreenShot(String fileName) {
@@ -64,6 +66,16 @@ public class Helpers {
         .add(shippingFee);
   }
 
+  // SearchField - press enter to search
+  public static void enterValueInSearchAndPressEnter(WebElement searchField, String productToFind) {
+    Actions actions = new Actions(BasePage.getDriver());
+    actions.moveToElement(searchField)
+        .click().sendKeys(productToFind)
+        .sendKeys(Keys.ENTER)
+        .build()
+        .perform();
+  }
+
   // Check TOTAL calculation
   public static BigDecimal addSubtotalToShippingFee(BigDecimal subTotal, BigDecimal shippingFee) {
     return subTotal.add(shippingFee);
@@ -72,12 +84,12 @@ public class Helpers {
   //// Get all products
   public static List<ProductComponents> getAllProducts(By containerLocator) {
     List<ProductComponents> products = new ArrayList<>();
-//
-//    waitUntilPageIsLoaded();
-//    scrollToElement(find(containerLocator));
+
+    waitUntilPageIsLoaded();
+    scrollToElement(find(containerLocator));
     List<WebElement> containers = BasePage.findAll(containerLocator);
 
-    waitUntilVisible(containerLocator,5);
+    waitUntilVisible(containerLocator, 5);
 
     for (WebElement container : containers) {
       ProductComponents productComponents = new ProductComponents(container);
