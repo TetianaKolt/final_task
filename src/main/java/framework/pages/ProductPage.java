@@ -51,7 +51,8 @@ public class ProductPage extends BasePage {
 
   public CartPage clickAddToCart() {
     Wait wait = new WebDriverWait(getDriver(), 5);
-    wait.until(ExpectedConditions.elementToBeClickable(getProductDetailsComponents().getAddToCartButton()));
+    wait.until(ExpectedConditions.elementToBeClickable(
+        getProductDetailsComponents().getAddToCartButton()));
     try {
       getProductDetailsComponents().getAddToCartButton().click();
     } catch (StaleElementReferenceException e) {

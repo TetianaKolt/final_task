@@ -82,7 +82,7 @@ public class SortingTest extends BaseTest {
         .chooseSortByOption(PRICE_HIGH_TO_LOW)
         .getProducts();
 
-   expectedPricesOrder = products.stream()
+    expectedPricesOrder = products.stream()
         .map(ProductComponents::getProductNewPriceText)
         .sorted(Comparator.reverseOrder())
         .collect(Collectors.toList());

@@ -73,9 +73,9 @@ public class Helpers {
         .multiply(quantity)
         .add(shippingFee);
   }
+
   // Check TOTAL calculation
-  public static BigDecimal addSubtotalToShippingFee(BigDecimal subTotal,
-      BigDecimal shippingFee) {
+  public static BigDecimal addSubtotalToShippingFee(BigDecimal subTotal, BigDecimal shippingFee) {
     return subTotal.add(shippingFee);
   }
 

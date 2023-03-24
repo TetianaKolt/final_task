@@ -26,7 +26,7 @@ public class HomePage extends BasePage {
 
   public List<ProductComponents> getProducts() {
     waitUntilPageIsLoaded();
-    waitUntilVisible(productsContainerLocator,5);
+    waitUntilVisible(productsContainerLocator, 5);
     scrollToElement(find(productsContainerLocator));
     return getAllProducts(productsContainerLocator);
   }

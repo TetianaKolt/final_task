@@ -82,12 +82,12 @@ public class PersonalInformationPage extends BasePage {
     return this;
   }
 
-  public PersonalInformationPage chooseRadioButtonMyCarrier(){
+  public PersonalInformationPage chooseRadioButtonMyCarrier() {
     getPersonalInfoShipping().getMyCarrierRadioButton().click();
     return this;
   }
 
-  public PersonalInformationPage clickContinueToPayment(){
+  public PersonalInformationPage clickContinueToPayment() {
     getPersonalInfoShipping().getContinueButton().click();
     return this;
   }

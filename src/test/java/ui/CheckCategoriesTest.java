@@ -28,7 +28,6 @@ public class CheckCategoriesTest extends BaseTest {
         .as("Subcategories are not the same as expected in " + CLOTHES)
         .containsExactlyElementsOf(expectedSubNames);
 
-
 //    Hover mouse over 'ACCESSORIES'
 //    Check that 'STATIONERY' and 'HOME ACCESSORIES' sub menu items appears
     actualSubNames =
@@ -45,7 +44,7 @@ public class CheckCategoriesTest extends BaseTest {
 
     //Check that no any sub category appears
     softAssertions.assertThat(actualSubNames)
-        .as("Subcategories are not the same as expected in "+ ART)
+        .as("Subcategories are not the same as expected in " + ART)
         .isEmpty();
 
     softAssertions.assertAll();

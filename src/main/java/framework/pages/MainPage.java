@@ -90,7 +90,6 @@ public class MainPage extends BasePage {
 
   @Step
   public boolean checkIfLanguageExistsInList(String languageToFind) {
-    System.out.println("Language to find: " + languageToFind);
     return getLanguageList().contains(languageToFind);
   }
 

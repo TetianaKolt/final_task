@@ -33,6 +33,35 @@ public class BasePage {
     return getDriver().findElement(locator);
   }
 
+  public static WebElement waitUntilVisible(By locator, int seconds) {
+    return new WebDriverWait(getDriver(), seconds).until(
+        ExpectedConditions.visibilityOfElementLocated(locator));
+  }
+
+  public static Boolean waitUntilTextIsPresent(WebElement webElement, String text, int seconds) {
+    return new WebDriverWait(getDriver(), seconds).until(
+        ExpectedConditions.textToBePresentInElement(webElement, text));
+  }
+
+//  protected WebElement waitUntilClickable(By locator, int seconds) {
+//    return new WebDriverWait(getDriver(), seconds).until(
+//        ExpectedConditions.elementToBeClickable(locator));
+//  }
+
+  public static void waitUntilPageIsLoaded() {
+    ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
+        .equals("complete");
+  }
+
+  // wait until loading message disappears and switch to iFrame of body
+  public static void waitUntilLoadingMessageDisappears() {
+    WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), 7000);
+    WebElement loadingMessage = find(By.id("loadingMessage"));
+
+    wait.until(ExpectedConditions.visibilityOfAllElements(loadingMessage));
+    wait.until(ExpectedConditions.invisibilityOfAllElements(loadingMessage));
+    getDriver().switchTo().frame("framelive");
+  }
 
   public void clickOnWebElement(WebElement webElement) {
     JavascriptExecutor executor = (JavascriptExecutor) getDriver();
@@ -45,40 +74,9 @@ public class BasePage {
     action.moveToElement(element).build().perform();
   }
 
-//  protected WebElement waitUntilClickable(By locator, int seconds) {
-//    return new WebDriverWait(getDriver(), seconds).until(
-//        ExpectedConditions.elementToBeClickable(locator));
-//  }
-
-  public static WebElement waitUntilVisible(By locator, int seconds) {
-    return new WebDriverWait(getDriver(), seconds).until(
-        ExpectedConditions.visibilityOfElementLocated(locator));
-  }
-
-  public static Boolean waitUntilTextIsPresent(WebElement webElement, String text, int seconds) {
-    return new WebDriverWait(getDriver(), seconds).until(
-        ExpectedConditions.textToBePresentInElement(webElement, text));
-  }
-
   public WebElement waitUntilPresent(By locator, int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.presenceOfElementLocated(locator));
-  }
-
-  public static void waitUntilPageIsLoaded() {
-    ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
-        .equals("complete");
-  }
-
-
-  // wait until loading message disappears and switch to iFrame of body
-  public static void waitUntilLoadingMessageDisappears() {
-    WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), 7000);
-    WebElement loadingMessage = find(By.id("loadingMessage"));
-
-    wait.until(ExpectedConditions.visibilityOfAllElements(loadingMessage));
-    wait.until(ExpectedConditions.invisibilityOfAllElements(loadingMessage));
-    getDriver().switchTo().frame("framelive");
   }
 
 

@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <!--<suite name="Run all tests" verbose="1">-->
-    <suite name="Run all tests" verbose="1" parallel="tests">
+<suite name="Run all tests" parallel="tests" verbose="1">
 
   <listeners>
     <listener class-name="framework.listeners.MyListener"/>

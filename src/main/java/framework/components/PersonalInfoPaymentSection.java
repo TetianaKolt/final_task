@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 @Getter
 public class PersonalInfoPaymentSection {
+
   private final WebElement payByCheckRadioButton;
   private final WebElement payByBankWireRadioButton;
   private final WebElement amount;

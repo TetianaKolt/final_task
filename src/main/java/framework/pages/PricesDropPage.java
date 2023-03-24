@@ -3,11 +3,7 @@ package framework.pages;
 import static framework.helpers.Helpers.getAllProducts;
 
 import framework.components.ProductComponents;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.openqa.selenium.By;
 
 public class PricesDropPage extends BasePage {

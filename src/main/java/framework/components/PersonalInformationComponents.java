@@ -38,7 +38,7 @@ public class PersonalInformationComponents {
       this.continueButton = container.findElement(By.xpath(
           "//footer[@class='form-footer clearfix']"
               + "//button[@class='continue btn btn-primary float-xs-right']"));
-    }catch (NoSuchElementException e){
+    } catch (NoSuchElementException e) {
       this.continueButton = null;
     }
   }

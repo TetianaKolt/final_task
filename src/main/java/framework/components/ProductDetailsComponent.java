@@ -16,17 +16,17 @@ public class ProductDetailsComponent {
   private final WebElement priceEl;
   private final BigDecimal price;
   private final String taxLabel;
+  private final WebElement productQuantityWanted;
+  private final WebElement buttonQuantityUp;
+  private final WebElement buttonQuantityDown;
+  private final WebElement addToCartButton;
+  private final WebElement addToWishListButton;
   private String productDescription;
   private WebElement productVariants;
   private WebElement selectProductOptions;
   private WebElement productCustomizationInput;
   private WebElement saveCustomizationButton;
   private WebElement productColorEl;
-  private final WebElement productQuantityWanted;
-  private final WebElement buttonQuantityUp;
-  private final WebElement buttonQuantityDown;
-  private final WebElement addToCartButton;
-  private final WebElement addToWishListButton;
 
 
   public ProductDetailsComponent(WebElement container) {
@@ -42,7 +42,7 @@ public class ProductDetailsComponent {
     try {
       this.productDescription = container.findElement(
           By.xpath("//div[@id='product-description-short-17']")).getText();
-    }catch (NoSuchElementException e){
+    } catch (NoSuchElementException e) {
       this.productDescription = null;
     }
     try {

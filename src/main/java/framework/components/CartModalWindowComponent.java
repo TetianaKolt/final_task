@@ -47,7 +47,7 @@ public class CartModalWindowComponent {
         (By.xpath("//div[@class='col-md-6']//span[@class='product-quantity']/strong"));
     this.selectedQuantityInt = getDigits(selectedQuantity);
     this.cartProductCountsText = container.findElement(
-        By.xpath("//div[@class='cart-content']//p[@class='cart-products-count']"))
+            By.xpath("//div[@class='cart-content']//p[@class='cart-products-count']"))
         .getText();
     this.subTotalPriceEl = container.findElement
         (By.xpath("//div[@class='cart-content']//span[@class='subtotal value']"));
@@ -56,7 +56,8 @@ public class CartModalWindowComponent {
         (By.xpath("//div[@class='cart-content']//span[@class='shipping value']"));
     this.shippingValue = getDigits(shippingValueEl);
     this.totalSumEl = container.findElement
-        (By.xpath("//div[@class='cart-content']//span[@class='value']"));;
+        (By.xpath("//div[@class='cart-content']//span[@class='value']"));
+    ;
     this.totalSum = getDigits(totalSumEl);
     this.continueShoppingButton = container.findElement
         (By.xpath("//div[@class='cart-content-btn']"
