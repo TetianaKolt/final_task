@@ -1,19 +1,17 @@
 package framework.helpers;
 
 import static framework.pages.BasePage.find;
+import static framework.pages.BasePage.waitUntilPageIsLoaded;
+import static framework.pages.BasePage.waitUntilVisible;
 
-import com.github.javafaker.Faker;
 import framework.components.ProductComponents;
 import framework.pages.BasePage;
 import io.qameta.allure.Attachment;
-import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.SneakyThrows;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -41,16 +39,7 @@ public class Helpers {
   public static boolean isHighlightedInRed(By locator, String cssValue) {
     return find(locator).getCssValue(cssValue).equals("rgba(255, 76, 76, 1)");
   }
-
-  // Take a screenshot
-  @SneakyThrows
-  public static void makeScreenShot() {
-    File scrFile = ((TakesScreenshot) BasePage.getDriver()).getScreenshotAs(OutputType.FILE);
-    FileUtils.copyFile(scrFile,
-        new File("/Users/AIM/IdeaProjects/pageObjectLab/src/test/resources/screenshots"
-            + new Faker().random().hex(10) + ".png"));
-  }
-
+  // take a screenshot
   @Attachment(value = "{fileName}", type = "image/png")
   public static byte[] takeScreenShot(String fileName) {
     return ((TakesScreenshot) BasePage.getDriver()).getScreenshotAs(OutputType.BYTES);
@@ -58,6 +47,7 @@ public class Helpers {
 
   //Get digits from WebElement
   public static BigDecimal getDigits(WebElement el) {
+    waitUntilPageIsLoaded();
     String text = el.getText();
     String price = text.replaceAll("[^\\d.]", "");
     if (price.equals("")) {
@@ -82,7 +72,12 @@ public class Helpers {
   //// Get all products
   public static List<ProductComponents> getAllProducts(By containerLocator) {
     List<ProductComponents> products = new ArrayList<>();
+//
+//    waitUntilPageIsLoaded();
+//    scrollToElement(find(containerLocator));
     List<WebElement> containers = BasePage.findAll(containerLocator);
+
+    waitUntilVisible(containerLocator,5);
 
     for (WebElement container : containers) {
       ProductComponents productComponents = new ProductComponents(container);

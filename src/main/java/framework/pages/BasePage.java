@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
@@ -33,20 +34,29 @@ public class BasePage {
     return getDriver().findElement(locator);
   }
 
+  private static final By spinnerLocator = By.xpath(
+      "//div[@class='faceted-overlay']//span[@class='spinner']");
+
   public static WebElement waitUntilVisible(By locator, int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.visibilityOfElementLocated(locator));
   }
 
-  public static Boolean waitUntilTextIsPresent(WebElement webElement, String text, int seconds) {
+  public static Boolean waitUntilSpinnerIsInvisible(int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
-        ExpectedConditions.textToBePresentInElement(webElement, text));
+        ExpectedConditions.invisibilityOfElementLocated(spinnerLocator));
   }
 
-//  protected WebElement waitUntilClickable(By locator, int seconds) {
-//    return new WebDriverWait(getDriver(), seconds).until(
-//        ExpectedConditions.elementToBeClickable(locator));
-//  }
+  public static WebElement waitUntilPresent(By locator, int seconds) {
+    return new WebDriverWait(getDriver(), seconds).until(
+        ExpectedConditions.presenceOfElementLocated(locator));
+  }
+
+  public static void waitUntilPageContentIsLoaded(int seconds) {
+    Wait wait = new WebDriverWait(getDriver(), seconds);
+    wait.until(
+        d -> ((JavascriptExecutor) d).executeScript("return jQuery.active").toString() == "0");
+  }
 
   public static void waitUntilPageIsLoaded() {
     ((JavascriptExecutor) getDriver()).executeScript("return document.readyState")
@@ -63,21 +73,9 @@ public class BasePage {
     getDriver().switchTo().frame("framelive");
   }
 
-  public void clickOnWebElement(WebElement webElement) {
-    JavascriptExecutor executor = (JavascriptExecutor) getDriver();
-    executor.executeScript("arguments[0].click()", webElement);
-  }
-
   public void hoverOverElement(By locator) {
     WebElement element = find(locator);
     Actions action = new Actions(getDriver());
     action.moveToElement(element).build().perform();
   }
-
-  public WebElement waitUntilPresent(By locator, int seconds) {
-    return new WebDriverWait(getDriver(), seconds).until(
-        ExpectedConditions.presenceOfElementLocated(locator));
-  }
-
-
 }

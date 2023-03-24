@@ -83,13 +83,13 @@ public class SortingTest extends BaseTest {
         .getProducts();
 
     expectedPricesOrder = products.stream()
-        .map(ProductComponents::getProductNewPriceText)
+        .map(ProductComponents::getProductRegularPriceText)
         .sorted(Comparator.reverseOrder())
         .collect(Collectors.toList());
 
     //Check that sorting is correct
     softAssertions.assertThat(products)
-        .map(ProductComponents::getProductNewPriceText)
+        .map(ProductComponents::getProductRegularPriceText)
         .as("Products are not sorted correctly according to the option " + PRICE_HIGH_TO_LOW)
         .containsExactlyElementsOf(expectedPricesOrder);
 
