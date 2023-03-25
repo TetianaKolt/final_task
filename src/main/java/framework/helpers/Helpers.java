@@ -7,6 +7,7 @@ import static framework.pages.BasePage.waitUntilVisible;
 import framework.components.ProductComponents;
 import framework.pages.BasePage;
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -24,7 +25,9 @@ import org.openqa.selenium.interactions.Actions;
 public class Helpers {
 
   // hover over element
-  public static void hoverOverElement(WebElement element) {
+  @Step("Hover over element {locator}")
+  public static void hoverOverElement(By locator) {
+    WebElement element = find(locator);
     Actions actions = new Actions(BasePage.getDriver());
     actions.moveToElement(element).build().perform();
   }
@@ -59,6 +62,7 @@ public class Helpers {
   }
 
   // Check TOTAL calculation
+  @Step("Calculate [total] using values {originalPrice}, {quantity}, {shippingFee}")
   public static BigDecimal multiplyPriceByQuantityAddShipping(BigDecimal originalPrice,
       BigDecimal quantity, BigDecimal shippingFee) {
     return originalPrice
@@ -66,7 +70,27 @@ public class Helpers {
         .add(shippingFee);
   }
 
+  // Check TOTAL calculation
+  @Step("Calculate [total] using values {subTotal} and {shippingFee}")
+  public static BigDecimal addSubtotalToShippingFee(BigDecimal subTotal, BigDecimal shippingFee) {
+    return subTotal.add(shippingFee);
+  }
+
+  @Step("Calculate [discounted price]")
+  public static List<BigDecimal> calculateDiscountedPrice(
+      List<ProductComponents> products) {
+    return products.stream()
+        .map(product -> {
+          BigDecimal productDiscount = product.getProductDiscountTagText();
+          BigDecimal regularPrice = product.getProductRegularPriceText();
+          return regularPrice.subtract(regularPrice.multiply(productDiscount)
+              .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN));
+        })
+        .collect(Collectors.toList());
+  }
+
   // SearchField - press enter to search
+  @Step("Enter {productToFind} in search field and press enter")
   public static void enterValueInSearchAndPressEnter(WebElement searchField, String productToFind) {
     Actions actions = new Actions(BasePage.getDriver());
     actions.moveToElement(searchField)
@@ -76,12 +100,8 @@ public class Helpers {
         .perform();
   }
 
-  // Check TOTAL calculation
-  public static BigDecimal addSubtotalToShippingFee(BigDecimal subTotal, BigDecimal shippingFee) {
-    return subTotal.add(shippingFee);
-  }
-
   //// Get all products
+  @Step("Get list of all products")
   public static List<ProductComponents> getAllProducts(By containerLocator) {
     List<ProductComponents> products = new ArrayList<>();
 
@@ -97,17 +117,4 @@ public class Helpers {
     }
     return products;
   }
-
-  public static List<BigDecimal> calculateDiscountedPrice(
-      List<ProductComponents> products) {
-    return products.stream()
-        .map(product -> {
-          BigDecimal productDiscount = product.getProductDiscountTagText();
-          BigDecimal regularPrice = product.getProductRegularPriceText();
-          return regularPrice.subtract(regularPrice.multiply(productDiscount)
-              .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN));
-        })
-        .collect(Collectors.toList());
-  }
-
 }

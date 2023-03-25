@@ -13,7 +13,7 @@ public class SearchResultsPage extends BasePage {
   private final By productsContainerLocator = By.xpath(
       "//div[@class='products row']/div");
 
-  @Step("Get ProductComponents")
+  /// @Step is moved to Helpers
   public List<ProductComponents> getProductComponents() {
     waitUntilPresent(productsContainerLocator, 10);
     return getAllProducts(productsContainerLocator);

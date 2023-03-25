@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -41,6 +40,7 @@ public class BasePage {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.visibilityOfElementLocated(locator));
   }
+
   public static WebElement waitUntilVisible(WebElement element, int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.visibilityOf(element));
@@ -55,6 +55,7 @@ public class BasePage {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.presenceOfElementLocated(locator));
   }
+
   public static WebElement waitUntilClickable(WebElement element, int seconds) {
     return new WebDriverWait(getDriver(), seconds).until(
         ExpectedConditions.elementToBeClickable(element));
@@ -79,11 +80,5 @@ public class BasePage {
     wait.until(ExpectedConditions.visibilityOfAllElements(loadingMessage));
     wait.until(ExpectedConditions.invisibilityOfAllElements(loadingMessage));
     getDriver().switchTo().frame("framelive");
-  }
-
-  public void hoverOverElement(By locator) {
-    WebElement element = find(locator);
-    Actions action = new Actions(getDriver());
-    action.moveToElement(element).build().perform();
   }
 }

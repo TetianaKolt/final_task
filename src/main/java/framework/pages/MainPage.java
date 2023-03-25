@@ -5,6 +5,7 @@ import static framework.enums.Categories.SubCategories.ART_SUB_CATEGORIES;
 import static framework.enums.Categories.SubCategories.CLOTHES_SUB_CATEGORIES;
 import static framework.helpers.Helpers.enterValueInSearchAndPressEnter;
 import static framework.helpers.Helpers.getAllProducts;
+import static framework.helpers.Helpers.hoverOverElement;
 import static framework.helpers.Helpers.scrollToElement;
 
 import framework.components.FooterComponents;
@@ -57,7 +58,7 @@ public class MainPage extends BasePage {
     return new HeaderComponents(find(headerContainer));
   }
 
-  @Step("Get Product components")
+  /// @Step is moved to Helpers
   public List<ProductComponents> getProductComponents() {
     scrollToElement(find(By.xpath("//section[@class='featured-products clearfix']")));
     waitUntilPageContentIsLoaded(5);
@@ -159,7 +160,7 @@ public class MainPage extends BasePage {
     return new HomePage();
   }
 
-  @Step("Search product by text")
+  @Step("Search product by text {wordToSearch}")
   public SearchResultsPage searchProductByText(String wordToSearch) {
     WebElement searchField = getHeaderComponents().getSearchField();
     enterValueInSearchAndPressEnter(searchField, wordToSearch);

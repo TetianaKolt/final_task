@@ -26,7 +26,7 @@ public class HomePage extends BasePage {
     return this;
   }
 
-  @Step("Get product list")
+/// @Step is moved to Helpers
   public List<ProductComponents> getProducts() {
     waitUntilPresent(By.xpath("//div[@class='products row']"), 10);
     scrollToElement(find(productsContainerLocator));
