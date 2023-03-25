@@ -20,7 +20,6 @@ public class MyListener implements ITestListener {
 
   @Override
   public void onTestFailure(ITestResult result) {
-
     Helpers.takeScreenShot(result.getName());
   }
 
@@ -31,7 +30,6 @@ public class MyListener implements ITestListener {
 
   @Override
   public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-
   }
 
   @Override

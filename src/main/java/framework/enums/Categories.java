@@ -10,7 +10,6 @@ public enum Categories {
   ACCESSORIES("//*[@id='category-6']"),
   ART("//*[@id='category-9']");
 
-
   private final String locator;
 
   @Getter

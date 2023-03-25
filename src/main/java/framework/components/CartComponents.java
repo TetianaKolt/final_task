@@ -67,8 +67,7 @@ public class CartComponents {
       this.quantity = cartProductContainer.findElement(
           By.xpath(".//input[@class='js-cart-line-product-quantity form-control']"));
       this.productCalculatedPriceEL = cartProductContainer.findElement(
-          By.xpath(".//span[@class='product-price']/strong")
-      );
+          By.xpath(".//span[@class='product-price']/strong"));
       this.productCalculatedPrice = getDigits(productCalculatedPriceEL);
       this.deleteButton = cartProductContainer.findElement(
           By.xpath(".//a[@class='remove-from-cart']"));

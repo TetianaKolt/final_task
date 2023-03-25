@@ -10,6 +10,6 @@ public enum ColorOptions {
   WHITE("White", By.xpath("//label[@aria-label='White']/input")),
   BLACK("Black", By.xpath("//label[@aria-label='Black']/input"));
 
-  private String colorName;
-  private By locator;
+  private final String colorName;
+  private final By locator;
 }

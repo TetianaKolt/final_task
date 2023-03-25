@@ -65,9 +65,7 @@ public class Helpers {
   @Step("Calculate [total] using values {originalPrice}, {quantity}, {shippingFee}")
   public static BigDecimal multiplyPriceByQuantityAddShipping(BigDecimal originalPrice,
       BigDecimal quantity, BigDecimal shippingFee) {
-    return originalPrice
-        .multiply(quantity)
-        .add(shippingFee);
+    return originalPrice.multiply(quantity).add(shippingFee);
   }
 
   // Check TOTAL calculation
@@ -77,26 +75,20 @@ public class Helpers {
   }
 
   @Step("Calculate [discounted price]")
-  public static List<BigDecimal> calculateDiscountedPrice(
-      List<ProductComponents> products) {
-    return products.stream()
-        .map(product -> {
-          BigDecimal productDiscount = product.getProductDiscountTagText();
-          BigDecimal regularPrice = product.getProductRegularPriceText();
-          return regularPrice.subtract(regularPrice.multiply(productDiscount)
-              .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN));
-        })
-        .collect(Collectors.toList());
+  public static List<BigDecimal> calculateDiscountedPrice(List<ProductComponents> products) {
+    return products.stream().map(product -> {
+      BigDecimal productDiscount = product.getProductDiscountTagText();
+      BigDecimal regularPrice = product.getProductRegularPriceText();
+      return regularPrice.subtract(regularPrice.multiply(productDiscount)
+          .divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_DOWN));
+    }).collect(Collectors.toList());
   }
 
   // SearchField - press enter to search
   @Step("Enter {productToFind} in search field and press enter")
   public static void enterValueInSearchAndPressEnter(WebElement searchField, String productToFind) {
     Actions actions = new Actions(BasePage.getDriver());
-    actions.moveToElement(searchField)
-        .click().sendKeys(productToFind)
-        .sendKeys(Keys.ENTER)
-        .build()
+    actions.moveToElement(searchField).click().sendKeys(productToFind).sendKeys(Keys.ENTER).build()
         .perform();
   }
 
