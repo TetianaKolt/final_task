@@ -17,17 +17,17 @@ public class ProductPage extends BasePage {
   private final By containerLocator = By.id("wrapper");
   private final By headerContainerLocator = By.id("header");
 
-  @Step
+  @Step("Get ProductDetailsComponents")
   public ProductDetailsComponent getProductDetailsComponents() {
     return new ProductDetailsComponent(find(containerLocator));
   }
 
-  @Step
+  @Step("Get HeaderComponents")
   public HeaderComponents getHeaderComponents() {
     return new HeaderComponents(find(headerContainerLocator));
   }
 
-  @Step
+  @Step("Choose product type")
   public ProductPage chooseProductType(String textToSelect) {
     getProductDetailsComponents().getProductVariants().click();
     Select selectValue = new Select(getProductDetailsComponents().getSelectProductOptions());
@@ -35,7 +35,7 @@ public class ProductPage extends BasePage {
     return this;
   }
 
-  @Step
+  @Step("Change quantity of product")
   public ProductPage changeQuantityTo(int quantity) {
     WebElement quantityEl = getProductDetailsComponents().getProductQuantityWanted();
     WebElement quantityButtonUp = getProductDetailsComponents().getButtonQuantityUp();
@@ -46,7 +46,7 @@ public class ProductPage extends BasePage {
     return this;
   }
 
-  @Step
+  @Step("Click 'Add to cart'")
   public CartPage clickAddToCart() {
     waitUntilClickable(getProductDetailsComponents().getAddToCartButton(), 5);
     try {
@@ -57,27 +57,25 @@ public class ProductPage extends BasePage {
     return new CartPage();
   }
 
-  @Step
+  @Step("Customize product with text")
   public ProductPage customizeProduct(String phraseToCustomize) {
-    getProductDetailsComponents().getProductCustomizationInput()
-        .sendKeys(phraseToCustomize);
+    getProductDetailsComponents().getProductCustomizationInput().sendKeys(phraseToCustomize);
     getProductDetailsComponents().getSaveCustomizationButton().click();
     return this;
   }
 
-  @Step
+  @Step("Find one more product by text")
   public SearchResultsPage findAnotherProductByText(String productToFind) {
     WebElement searchField = getHeaderComponents().getSearchField();
-    waitUntilVisible(searchField,5);
+    waitUntilVisible(searchField, 5);
     scrollToElement(searchField);
     enterValueInSearchAndPressEnter(searchField, productToFind);
     return new SearchResultsPage();
   }
 
-  @Step
+  @Step("Select color of product")
   public ProductPage selectColor(ColorOptions color) {
-    getProductDetailsComponents().getProductColorEl()
-        .findElement(color.getLocator()).click();
+    getProductDetailsComponents().getProductColorEl().findElement(color.getLocator()).click();
     return this;
   }
 
