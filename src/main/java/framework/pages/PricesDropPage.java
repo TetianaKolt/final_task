@@ -3,7 +3,6 @@ package framework.pages;
 import static framework.helpers.Helpers.getAllProducts;
 
 import framework.components.ProductComponents;
-import io.qameta.allure.Step;
 import java.util.List;
 import org.openqa.selenium.By;
 
