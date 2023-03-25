@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
   private final By productsContainerLocator =
       By.xpath("//div[@class='products row']/div");
 
-  @Step("Choose 'Sort by' option")
+  @Step("Choose 'Sort by' option as {chooseOption}")
   public HomePage chooseSortByOption(SortByOptions chooseOption) {
     scrollToElement(find(By.id("js-product-list-top")));
     find(sortButtonLocator).click();
@@ -26,7 +26,7 @@ public class HomePage extends BasePage {
     return this;
   }
 
-/// @Step is moved to Helpers
+  /// @Step is moved to Helpers
   public List<ProductComponents> getProducts() {
     waitUntilPresent(By.xpath("//div[@class='products row']"), 10);
     scrollToElement(find(productsContainerLocator));
