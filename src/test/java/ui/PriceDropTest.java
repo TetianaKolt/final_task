@@ -16,7 +16,7 @@ public class PriceDropTest extends BaseTest {
   @Test
   public void priceDropCheckTest() {
     //At the bottom of the page click on 'Prices drop' link
-    List<ProductComponents> products = mainPage.goToTheFooter()
+    List<ProductComponents> products = mainPage.goToTheBottom()
         .clickPricesDrop()
         .getProducts();
 
