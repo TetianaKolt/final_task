@@ -22,35 +22,35 @@ public class CreateAnAccountPage extends BasePage {
     return new PersonalInformationComponents(find(personalInfoContainerLocator));
   }
 
-  @Step("Fill first name ")
+  @Step("Fill first name as {firstName}")
   public CreateAnAccountPage fillFirstName(String firstName) {
     log.info("Fill first name");
     getPersonalInformationComponents().getFirstNameInput().sendKeys(firstName);
     return this;
   }
 
-  @Step("Fill last name")
+  @Step("Fill last name as {lastName}")
   public CreateAnAccountPage fillLastName(String lastName) {
     log.info("Fill last name");
     getPersonalInformationComponents().getLastNameInput().sendKeys(lastName);
     return this;
   }
 
-  @Step("Fill email")
+  @Step("Fill email as {email}")
   public CreateAnAccountPage fillEmail(String email) {
     log.info("Fill email");
     getPersonalInformationComponents().getEmailInput().sendKeys(email);
     return this;
   }
 
-  @Step("Fill password")
+  @Step("Fill password as {password}")
   public CreateAnAccountPage fillPassword(String password) {
     log.info("Fill password");
     getPersonalInformationComponents().getPasswordInput().sendKeys(password);
     return this;
   }
 
-  @Step("Fill birth date")
+  @Step("Fill birth date as {date}")
   public CreateAnAccountPage fillBirthDate(String date) {
     log.info("Fill birth date");
     getPersonalInformationComponents().getBirthdateInput().sendKeys(date);
