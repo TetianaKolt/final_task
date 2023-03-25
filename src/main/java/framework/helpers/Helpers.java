@@ -116,10 +116,8 @@ public class Helpers {
   public static void ifAlertIsPresent() {
     try {
       Alert alert = getDriver().switchTo().alert();
-      String alertText = alert.getText();
-      System.out.println("Alert message: " + alertText);
+      alert.getText();
       alert.dismiss();
-      System.out.println("Alert dismissed");
     } catch (NoAlertPresentException e) {
       getDriver().switchTo().defaultContent();
     }
