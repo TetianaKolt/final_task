@@ -95,8 +95,7 @@ public class PersonalInformationPage extends BasePage {
   public PersonalInformationPage chooseRadioButtonMyCarrier() {
 
     WebElement radioButton = getPersonalInfoShipping().getMyCarrierRadioButton();
-    waitUntilVisible(radioButton,5);
-//    scrollToElement(radioButton);
+    waitUntilVisible(radioButton, 5);
     radioButton.click();
     return this;
   }

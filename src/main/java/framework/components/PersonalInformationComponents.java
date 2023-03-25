@@ -1,5 +1,6 @@
 package framework.components;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -19,7 +20,6 @@ public class PersonalInformationComponents {
   private final WebElement customerDataPrivacyCheckBox;
   private final WebElement iAgreeCheckbox;
   private WebElement continueButton;
-
   public PersonalInformationComponents(WebElement container) {
     this.socialTitleRadioButtonMR = container.findElement(
         By.xpath("//*[@id='field-id_gender-1']"));
