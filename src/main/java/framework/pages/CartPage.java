@@ -14,22 +14,22 @@ import org.openqa.selenium.WebElement;
 public class CartPage extends BasePage {
 
   private final By cartModalWindowLocator = By.xpath("//div[@id='blockcart-modal']");
-  private final By getCartWindowLocator= By.xpath("//div[@class='cart-grid row']");
+  private final By getCartWindowLocator = By.xpath("//div[@class='cart-grid row']");
 //  private final By cartContainerLocator = By.id("main");
 
-  @Step
+  @Step("Get CartModalWindow components")
   public CartModalWindowComponent getCartModalWindowComponents() {
-    waitUntilVisible(cartModalWindowLocator,10);
+    waitUntilVisible(cartModalWindowLocator, 10);
     getDriver().switchTo().activeElement();
     return new CartModalWindowComponent(find(cartModalWindowLocator));
   }
 
-  @Step
+  @Step("Get Cart components")
   public CartComponents getCartComponents() {
     return new CartComponents(find(getCartWindowLocator));
   }
 
-  @Step
+  @Step("Click 'continue shopping'")
   public ProductPage clickContinueShopping() {
     WebElement continueShopping = getCartModalWindowComponents().getContinueShoppingButton();
     waitUntilVisible(continueShopping, 5);
@@ -39,15 +39,15 @@ public class CartPage extends BasePage {
     return new ProductPage();
   }
 
-  @Step
+  @Step("Click 'proceed to checkout'")
   public CartPage clickProceedToCheckout() {
     WebElement proceed = getCartModalWindowComponents().getProceedToCheckoutButton();
-    waitUntilVisible(proceed,5);
+    waitUntilVisible(proceed, 5);
     proceed.click();
     return this;
   }
 
-  @Step
+  @Step("Click 'Proceed to checkout' to move to personal info")
   public PersonalInformationPage clickProceedToCheckoutToPersonalInfo() {
     WebElement proceed = getCartComponents().getProceedToCheckoutButton();
     scrollToElement(proceed);
@@ -55,7 +55,7 @@ public class CartPage extends BasePage {
     return new PersonalInformationPage();
   }
 
-  @Step
+  // @Step is in Helpers
   public BigDecimal calculateTotal() {
     return addSubtotalToShippingFee(
         getCartComponents().getPriceValue(),
