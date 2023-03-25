@@ -121,8 +121,8 @@ public class Helpers {
       alert.dismiss();
       System.out.println("Alert dismissed");
     } catch (NoAlertPresentException e) {
-      System.out.println("No alert present");
+      getDriver().switchTo().defaultContent();
     }
-    getDriver().switchTo().defaultContent();
+
   }
 }

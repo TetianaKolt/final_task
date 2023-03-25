@@ -102,9 +102,7 @@ public class PersonalInformationPage extends BasePage {
       JavascriptExecutor executor = (JavascriptExecutor) getDriver();
       executor.executeScript("arguments[0].click();", continueButton);
     }
-
     ifAlertIsPresent();
-
     waitUntilVisible(personalInfoShippingContainerLocator, 10);
     return this;
   }
