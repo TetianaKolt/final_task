@@ -94,7 +94,7 @@ public class MainPage extends BasePage {
         .collect(Collectors.toList());
   }
 
-  @Step("Check if language exists in the list")
+  @Step("Check if language {languageToFind} exists in the list")
   public boolean checkIfLanguageExistsInList(String languageToFind) {
     log.info("Check if language exists in the list");
     return getLanguageList().contains(languageToFind);
@@ -116,7 +116,7 @@ public class MainPage extends BasePage {
         .getText();
   }
 
-  @Step("Get all subcategories")
+  @Step("Get all subcategories for category {category}")
   public List<String> getAllSubCategories(Categories category) {
     hoverOverElement(By.xpath(category.getLocator()));
     getDriver().switchTo().activeElement();
