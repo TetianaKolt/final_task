@@ -19,12 +19,10 @@ public class SearchResultsPage extends BasePage {
     return getAllProducts(productsContainerLocator);
   }
 
-  @Step("Click on product")
+  @Step("Click on product with name {title}")
   public ProductPage clickOnProductWithName(String title) {
-    List<ProductComponents> collect = getProductComponents()
-        .stream()
-        .filter(pr -> pr.getProductTitleText().contains(title))
-        .collect(Collectors.toList());
+    List<ProductComponents> collect = getProductComponents().stream()
+        .filter(pr -> pr.getProductTitleText().contains(title)).collect(Collectors.toList());
     collect.get(0).getProductTitleElement().click();
     return new ProductPage();
   }
