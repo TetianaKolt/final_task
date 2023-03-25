@@ -27,7 +27,7 @@ public class ProductPage extends BasePage {
     return new HeaderComponents(find(headerContainerLocator));
   }
 
-  @Step("Choose product type")
+  @Step("Choose product type as {textToSelect}")
   public ProductPage chooseProductType(String textToSelect) {
     getProductDetailsComponents().getProductVariants().click();
     Select selectValue = new Select(getProductDetailsComponents().getSelectProductOptions());
@@ -35,7 +35,7 @@ public class ProductPage extends BasePage {
     return this;
   }
 
-  @Step("Change quantity of product")
+  @Step("Change quantity of product as {quantity}")
   public ProductPage changeQuantityTo(int quantity) {
     WebElement quantityEl = getProductDetailsComponents().getProductQuantityWanted();
     WebElement quantityButtonUp = getProductDetailsComponents().getButtonQuantityUp();
@@ -57,14 +57,14 @@ public class ProductPage extends BasePage {
     return new CartPage();
   }
 
-  @Step("Customize product with text")
+  @Step("Customize product with text as {phraseToCustomize}")
   public ProductPage customizeProduct(String phraseToCustomize) {
     getProductDetailsComponents().getProductCustomizationInput().sendKeys(phraseToCustomize);
     getProductDetailsComponents().getSaveCustomizationButton().click();
     return this;
   }
 
-  @Step("Find one more product by text")
+  @Step("Find one more product by text as {productToFind}")
   public SearchResultsPage findAnotherProductByText(String productToFind) {
     WebElement searchField = getHeaderComponents().getSearchField();
     waitUntilVisible(searchField, 5);
@@ -73,7 +73,7 @@ public class ProductPage extends BasePage {
     return new SearchResultsPage();
   }
 
-  @Step("Select color of product")
+  @Step("Select color of product as {color}")
   public ProductPage selectColor(ColorOptions color) {
     getProductDetailsComponents().getProductColorEl().findElement(color.getLocator()).click();
     return this;
