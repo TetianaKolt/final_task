@@ -15,33 +15,22 @@ public class PriceDropTest extends BaseTest {
 
   @Test
   public void priceDropCheckTest() {
-    //At the bottom of the page click on 'Prices drop' link
-    List<ProductComponents> products = mainPage.goToTheBottom()
-        .clickPricesDrop()
-        .getProducts();
+    List<ProductComponents> products = mainPage.goToTheBottom().clickPricesDrop().getProducts();
 
     SoftAssertions softAssertions = new SoftAssertions();
-    //Check that every product has old and new price
-    softAssertions.assertThat(products)
-        .map(ProductComponents::getProductRegularPrice)
-        .as("Product(s) do(es) not have [old price]")
-        .doesNotContainNull();
+    softAssertions.assertThat(products).map(ProductComponents::getProductRegularPrice)
+        .as("Product(s) do(es) not have [old price]").doesNotContainNull();
 
-    softAssertions.assertThat(products)
-        .map(ProductComponents::getProductNewPrice)
-        .as("Product(s) do(es) not have [new price]")
-        .doesNotContainNull();
+    softAssertions.assertThat(products).map(ProductComponents::getProductNewPrice)
+        .as("Product(s) do(es) not have [new price]").doesNotContainNull();
 
-    //Check that promo price for every product calculates correct
     List<BigDecimal> expectedPricesAfterCalculation = calculateDiscountedPrice(products);
 
-    softAssertions.assertThat(products)
-        .map(ProductComponents::getProductNewPriceText)
+    softAssertions.assertThat(products).map(ProductComponents::getProductNewPriceText)
         .as("Promo [price] is not calculated correctly")
         .containsExactlyElementsOf(expectedPricesAfterCalculation);
 
     softAssertions.assertAll();
-
   }
 
 }

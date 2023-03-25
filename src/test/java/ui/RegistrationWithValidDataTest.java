@@ -23,20 +23,12 @@ public class RegistrationWithValidDataTest extends BaseTest {
     String userPassword = generateFakePassword();
     String userBirthDate = generateFakeDate();
 
-    mainPage.clickOnSignInButton()
-        .clickOnNoAccountLink()
-        .fillFirstName(userFirstName)
-        .fillLastName(userLastName)
-        .fillEmail(userEmail)
-        .fillPassword(userPassword)
-        .fillBirthDate(userBirthDate)
-        .tickCustomerDataPrivacyCheckbox()
-        .tickIAgreeCheckbox()
+    mainPage.clickOnSignInButton().clickOnNoAccountLink().fillFirstName(userFirstName)
+        .fillLastName(userLastName).fillEmail(userEmail).fillPassword(userPassword)
+        .fillBirthDate(userBirthDate).tickCustomerDataPrivacyCheckbox().tickIAgreeCheckbox()
         .clickSaveButtonPass();
 
     String nameNearTheCart = mainPage.checkNameNearCart();
-
-//    Check your name appear near cart button
 
     Assertions.assertThat(nameNearTheCart)
         .as("Registered user name is not displayed near the cart after registration")

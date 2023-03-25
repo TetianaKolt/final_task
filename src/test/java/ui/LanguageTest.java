@@ -16,20 +16,16 @@ public class LanguageTest extends BaseTest {
     int actualQuantityOfLanguages = languages.size();
     int expectedQuantityOfLanguages = 44;
 
-    //Check that 44 languages exists in 'Language' dropdown in the top menu
     SoftAssertions softAssertions = new SoftAssertions();
     softAssertions.assertThat(actualQuantityOfLanguages)
         .as("Actual quantity of languages differs from expected")
         .isEqualTo(expectedQuantityOfLanguages);
 
-    //Check that 'Українська' language exist in dropdown
     String languageToLookFor = "Українська";
-    boolean exists = mainPage.checkIfLanguageExistsInList(languageToLookFor);
     softAssertions.assertThat(languages)
         .as("The language [" + languageToLookFor + "] is not in the list")
         .contains(languageToLookFor);
     softAssertions.assertAll();
-
   }
 
 }

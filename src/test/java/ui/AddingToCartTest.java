@@ -21,21 +21,19 @@ public class AddingToCartTest extends BaseTest {
     int productQuantity = 5;
 
     CartModalWindowComponent cartModalWindow = mainPage
-        .searchProductByText(wordToSearch)          //In the search field enter 'Bear' and press 'Enter'
-        .clickOnProductWithName(productNameToClick)     //On the 'SEARCH RESULTS' page click on 'Brown Bear Notebook'
-        .chooseProductType(productType)         //Change 'Paper type' to 'Doted'
-        .changeQuantityTo(productQuantity)                           //Change 'Quantity' to '5'
-        .clickAddToCart().getCartModalWindowComponents();//Click 'ADD TO CART' button
+        .searchProductByText(wordToSearch)
+        .clickOnProductWithName(productNameToClick)
+        .chooseProductType(productType)
+        .changeQuantityTo(productQuantity)
+        .clickAddToCart().getCartModalWindowComponents();
 
     SoftAssertions softAssertions = new SoftAssertions();
-    //Check that new window with title 'Product successfully added to your shopping cart' appears
     String expectedModalWindowTitle = "Product successfully added to your shopping cart";
 
     softAssertions.assertThat(cartModalWindow.getModalTitle())
         .as("The [title] is not as expected")
         .isEqualTo(expectedModalWindowTitle);
 
-    //Check that correct 'Paper Type' and 'Quantity' is shown on the left side of the window
     softAssertions.assertThat(cartModalWindow.getSelectedOptions())
         .as("Product [Option] is not according to the selected one: " + productType)
         .isEqualTo(productType);
@@ -44,7 +42,6 @@ public class AddingToCartTest extends BaseTest {
         .as("Product [quantity] is not according to the selected one: " + productQuantity)
         .isEqualTo(String.valueOf(productQuantity));
 
-    //Check that 'Total' calculated correct
     BigDecimal expectedTotal = multiplyPriceByQuantityAddShipping(cartModalWindow.getProductPrice(),
         cartModalWindow.getSelectedQuantityInt(), cartModalWindow.getShippingValue());
 
