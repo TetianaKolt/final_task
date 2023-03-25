@@ -41,25 +41,25 @@ public class PersonalInformationPage extends BasePage {
     return new PersonalInformationComponents(find(personalInfoContainerLocator));
   }
 
-  @Step("Fill first name")
+  @Step("Fill first name as {firstName}")
   public PersonalInformationPage fillFirstName(String firstName) {
     getPersonalInformationComponents().getFirstNameInput().sendKeys(firstName);
     return this;
   }
 
-  @Step("Fill last name")
+  @Step("Fill last name as {lastName}")
   public PersonalInformationPage fillLastName(String lastName) {
     getPersonalInformationComponents().getLastNameInput().sendKeys(lastName);
     return this;
   }
 
-  @Step("Fill email")
+  @Step("Fill email as {email}")
   public PersonalInformationPage fillEmail(String email) {
     getPersonalInformationComponents().getEmailInput().sendKeys(email);
     return this;
   }
 
-  @Step("Fill birth date")
+  @Step("Fill birth date as {date}")
   public PersonalInformationPage fillBirthDate(String date) {
     getPersonalInformationComponents().getBirthdateInput().sendKeys(date);
     return this;
@@ -83,7 +83,7 @@ public class PersonalInformationPage extends BasePage {
     return this;
   }
 
-  @Step("Fill in address")
+  @Step("Fill in address with {address}, {postalCode}, {city}")
   public PersonalInformationPage fillInAddress(String address, String postalCode, String city) {
     getPersonalInfoAddressesComponents().getAddressInput().sendKeys(address);
     getPersonalInfoAddressesComponents().getZipPostalCodeInput().sendKeys(postalCode);
