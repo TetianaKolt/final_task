@@ -40,6 +40,6 @@ public class PersonalInfoAddressesComponents {
     this.checkBoxUseThisAddress = container.findElement(
         By.xpath("//input[@id='use_same_address']"));
     this.continueButton = container.findElement(
-        By.xpath("//input[@name='submitAddress']"));
+        By.xpath("//div[@id='delivery-address']//button[@type='submit']"));
   }
 }

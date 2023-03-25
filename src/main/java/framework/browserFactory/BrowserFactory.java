@@ -25,9 +25,7 @@ public class BrowserFactory {
   }
 
   public enum Browsers {
-    CHROME,
-    FIREFOX,
-    SAFARI
+    CHROME, FIREFOX, SAFARI
   }
 
 }

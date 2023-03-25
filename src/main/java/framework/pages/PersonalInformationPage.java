@@ -1,5 +1,6 @@
 package framework.pages;
 
+import static framework.helpers.Helpers.ifAlertIsPresent;
 import static framework.helpers.Helpers.scrollToElement;
 
 import framework.components.PersonalInfoAddressesComponents;
@@ -95,15 +96,19 @@ public class PersonalInformationPage extends BasePage {
   public PersonalInformationPage clickContinueToShippingMethod() {
     WebElement continueButton = getPersonalInfoAddressesComponents().getContinueButton();
     scrollToElement(continueButton);
-
     try {
       continueButton.click();
     } catch (ElementNotInteractableException e) {
       JavascriptExecutor executor = (JavascriptExecutor) getDriver();
       executor.executeScript("arguments[0].click();", continueButton);
     }
+
+    ifAlertIsPresent();
+
+    waitUntilVisible(personalInfoShippingContainerLocator, 10);
     return this;
   }
+
 
   @Step("Choose 'My Carrier' radio button")
   public PersonalInformationPage chooseRadioButtonMyCarrier() {

@@ -1,6 +1,7 @@
 package framework.helpers;
 
 import static framework.pages.BasePage.find;
+import static framework.pages.BasePage.getDriver;
 import static framework.pages.BasePage.waitUntilPageIsLoaded;
 import static framework.pages.BasePage.waitUntilVisible;
 
@@ -13,9 +14,11 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
@@ -28,14 +31,14 @@ public class Helpers {
   @Step("Hover over element {locator}")
   public static void hoverOverElement(By locator) {
     WebElement element = find(locator);
-    Actions actions = new Actions(BasePage.getDriver());
+    Actions actions = new Actions(getDriver());
     actions.moveToElement(element).build().perform();
   }
 
 
   // scroll to element
   public static void scrollToElement(WebElement element) {
-    JavascriptExecutor jse = (JavascriptExecutor) BasePage.getDriver();
+    JavascriptExecutor jse = (JavascriptExecutor) getDriver();
     jse.executeScript("arguments[0].scrollIntoView(true);", element);
   }
 
@@ -47,7 +50,7 @@ public class Helpers {
   // take a screenshot
   @Attachment(value = "{fileName}", type = "image/png")
   public static byte[] takeScreenShot(String fileName) {
-    return ((TakesScreenshot) BasePage.getDriver()).getScreenshotAs(OutputType.BYTES);
+    return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
   }
 
   //Get digits from WebElement
@@ -87,7 +90,7 @@ public class Helpers {
   // SearchField - press enter to search
   @Step("Enter {productToFind} in search field and press enter")
   public static void enterValueInSearchAndPressEnter(WebElement searchField, String productToFind) {
-    Actions actions = new Actions(BasePage.getDriver());
+    Actions actions = new Actions(getDriver());
     actions.moveToElement(searchField).click().sendKeys(productToFind).sendKeys(Keys.ENTER).build()
         .perform();
   }
@@ -108,5 +111,18 @@ public class Helpers {
       products.add(productComponents);
     }
     return products;
+  }
+
+  public static void ifAlertIsPresent() {
+    try {
+      Alert alert = getDriver().switchTo().alert();
+      String alertText = alert.getText();
+      System.out.println("Alert message: " + alertText);
+      alert.dismiss();
+      System.out.println("Alert dismissed");
+    } catch (NoAlertPresentException e) {
+      System.out.println("No alert present");
+    }
+    getDriver().switchTo().defaultContent();
   }
 }
