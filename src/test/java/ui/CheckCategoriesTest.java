@@ -3,9 +3,10 @@ package ui;
 import static framework.enums.Categories.ACCESSORIES;
 import static framework.enums.Categories.ART;
 import static framework.enums.Categories.CLOTHES;
+import static framework.enums.Categories.SubCategories.ACCESSORIES_SUB_CATEGORIES;
+import static framework.enums.Categories.SubCategories.CLOTHES_SUB_CATEGORIES;
 
 import framework.pages.MainPage;
-import java.util.Arrays;
 import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
@@ -18,7 +19,7 @@ public class CheckCategoriesTest extends BaseTest {
   public void checkCategoriesTest() {
     List<String> actualSubNames =
         mainPage.getAllSubCategories(CLOTHES);
-    List<String> expectedSubNames = Arrays.asList("MEN", "WOMEN");
+    List<String> expectedSubNames = CLOTHES_SUB_CATEGORIES.getSubCategoriesNames();
 
     SoftAssertions softAssertions = new SoftAssertions();
     softAssertions.assertThat(actualSubNames)
@@ -27,7 +28,7 @@ public class CheckCategoriesTest extends BaseTest {
 
     actualSubNames =
         mainPage.getAllSubCategories(ACCESSORIES);
-    expectedSubNames = Arrays.asList("STATIONERY", "HOME ACCESSORIES");
+    expectedSubNames = ACCESSORIES_SUB_CATEGORIES.getSubCategoriesNames();
 
     softAssertions.assertThat(actualSubNames)
         .as("Subcategories are not the same as expected in " + ACCESSORIES)
