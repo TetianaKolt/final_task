@@ -15,7 +15,6 @@ public class CartPage extends BasePage {
 
   private final By cartModalWindowLocator = By.xpath("//div[@id='blockcart-modal']");
   private final By getCartWindowLocator = By.xpath("//div[@class='cart-grid row']");
-//  private final By cartContainerLocator = By.id("main");
 
   @Step("Get CartModalWindow components")
   public CartModalWindowComponent getCartModalWindowComponents() {
