@@ -1,6 +1,7 @@
 package framework.pages;
 
 import java.util.List;
+import java.util.Objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -62,9 +63,10 @@ public class BasePage {
   }
 
   public static void waitUntilPageContentIsLoaded(int seconds) {
-    Wait wait = new WebDriverWait(getDriver(), seconds);
+    WebDriverWait wait = new WebDriverWait(getDriver(), seconds);
     wait.until(
-        d -> ((JavascriptExecutor) d).executeScript("return jQuery.active").toString() == "0");
+        d -> Objects.equals(
+            ((JavascriptExecutor) d).executeScript("return jQuery.active").toString(), "0"));
   }
 
   public static void waitUntilPageIsLoaded() {
@@ -74,7 +76,7 @@ public class BasePage {
 
   // wait until loading message disappears and switch to iFrame of body
   public static void waitUntilLoadingMessageDisappears() {
-    WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), 7000);
+    WebDriverWait wait = new WebDriverWait(BasePage.getDriver(),5);
     WebElement loadingMessage = find(By.id("loadingMessage"));
 
     wait.until(ExpectedConditions.visibilityOfAllElements(loadingMessage));

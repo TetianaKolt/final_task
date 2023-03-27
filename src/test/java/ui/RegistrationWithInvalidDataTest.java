@@ -18,10 +18,16 @@ public class RegistrationWithInvalidDataTest extends BaseTest {
   public void registrationWithInvalidDataTest() {
     String fakeFirstName = "James8";
 
-    CreateAnAccountPage accountPage = mainPage.clickOnSignInButton().clickOnNoAccountLink()
-        .fillFirstName(fakeFirstName).fillLastName(generateFakeLastName())
-        .fillEmail(generateFakeEmail()).fillPassword(generateFakePassword())
-        .fillBirthDate(generateFakeDate()).tickCustomerDataPrivacyCheckbox().tickIAgreeCheckbox()
+    CreateAnAccountPage accountPage = mainPage
+        .clickOnSignInButton()
+        .clickOnNoAccountLink()
+        .fillFirstName(fakeFirstName)
+        .fillLastName(generateFakeLastName())
+        .fillEmail(generateFakeEmail())
+        .fillPassword(generateFakePassword())
+        .fillBirthDate(generateFakeDate())
+        .tickCustomerDataPrivacyCheckbox()
+        .tickIAgreeCheckbox()
         .clickSaveButtonFail();
 
     boolean isFieldHighlighted = accountPage.checkIfFirstNameIsHighlighted();
