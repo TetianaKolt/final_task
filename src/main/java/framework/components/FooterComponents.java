@@ -21,9 +21,11 @@ public class FooterComponents {
     this.textNearEmailBlockNewsLetter = footerContainer.findElement(
         By.id("block-newsletter-label"));
     this.textNearEmailBlockNewsLetterText = textNearEmailBlockNewsLetter.getText();
-    this.textUnderEmailInput = footerContainer.findElement(By.xpath("//div[@class='col-xs-12']/p"));
+    this.textUnderEmailInput = footerContainer.findElement(By.xpath(
+        "//div[@class='col-xs-12']/p"));
     this.textUnderEmailInputText = textUnderEmailInput.getText();
-    this.subscribeButton = footerContainer.findElement(By.xpath("//input[@value='Subscribe']"));
+    this.subscribeButton = footerContainer.findElement(By.xpath(
+        "//input[@value='Subscribe']"));
     this.emailInput = footerContainer.findElement(By.xpath("//input[@name='email']"));
   }
 }

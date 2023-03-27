@@ -18,8 +18,10 @@ public class HeaderComponents {
 
   public HeaderComponents(WebElement container) {
     this.contactUsButton = container.findElement(By.xpath("//*[@id='contact-link']"));
-    this.languageButton = container.findElement(By.xpath("//*[@id='_desktop_language_selector']"));
-    this.signInOutUserInfo = container.findElement(By.xpath("//*[@id='_desktop_user_info']"));
+    this.languageButton = container.findElement(By.xpath(
+        "//*[@id='_desktop_language_selector']"));
+    this.signInOutUserInfo = container.findElement(By.xpath(
+        "//*[@id='_desktop_user_info']"));
     this.cartButton = container.findElement(By.xpath("//*[@id='_desktop_cart']"));
     this.logoMenuOption = container.findElement(By.xpath("//*[@id='_desktop_logo']"));
     this.searchField = container.findElement(By.xpath("//div[@id='search_widget']"));

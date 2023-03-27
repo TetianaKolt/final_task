@@ -32,8 +32,9 @@ public class ProductComponents {
       this.productNewPrice = null;
     }
     try {
+      assert productNewPrice != null;
       this.productNewPriceText = getDigits(productNewPrice);
-    } catch (NullPointerException e) {
+    } catch (AssertionError e) {
       this.productNewPriceText = null;
     }
 
@@ -44,8 +45,9 @@ public class ProductComponents {
       this.productRegularPrice = this.productNewPrice;
     }
     try {
+      assert productRegularPrice != null;
       this.productRegularPriceText = getDigits(productRegularPrice);
-    } catch (Exception e) {
+    } catch (AssertionError e) {
       productRegularPriceText = this.productNewPriceText;
     }
 
@@ -67,6 +69,7 @@ public class ProductComponents {
       productDiscountTag = null;
     }
     try {
+      assert productDiscountTag != null;
       this.productDiscountTagText = getDigits(productDiscountTag);
     } catch (NullPointerException e) {
       productDiscountTagText = null;
